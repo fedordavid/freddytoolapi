@@ -1,27 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Freddy.Persistance.DbContexts;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using HostBuilder = Microsoft.Extensions.Hosting.Host;
 
 namespace Freddy.Host
 {
+    [UsedImplicitly]
     public class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            
+            using (var scope = host.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetService<DatabaseContext>();
+                // context.Database.EnsureDeleted();
+                context.Database.Migrate();
+            }
+            
+            host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            HostBuilder.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        [UsedImplicitly]
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return HostBuilder
+                .CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+        }
     }
 }

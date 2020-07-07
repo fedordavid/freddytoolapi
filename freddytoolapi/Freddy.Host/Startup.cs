@@ -1,7 +1,4 @@
 using AutoMapper;
-using Freddy.Application;
-using Freddy.Application.Models;
-using Freddy.Application.Queries;
 using Freddy.Persistance;
 using Freddy.Persistance.DbContexts;
 using Microsoft.AspNetCore.Builder;
@@ -11,36 +8,41 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Freddy.Application.Commands.Products;
+using Freddy.Application.Core.Commands;
+using Freddy.Application.Core.Queries;
+using Freddy.Application.Queries.Products;
+using JetBrains.Annotations;
 
 namespace Freddy.Host
 {
     public class Startup
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddDbContext<DatabaseContext>(options =>
-            {
-                options.UseSqlServer(
-                    _configuration.GetConnectionString("Database"));
-            });
+            services.AddAutoMapper(typeof(ProductViewProfile));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(_configuration.GetConnectionString("Database")));
 
-
-            services.AddScoped<IQueryService, QueryService>();
+            services.AddScoped<IQueryBus, QueryBus>();
+            services.AddScoped<IExecuteQuery<GetAllProductsQuery, ProductView[]>, GetAllProducts>();
+            services.AddScoped<IExecuteQuery<GetProductByIdQuery, ProductView>, GetProductById>();
+            
+            services.AddScoped<ICommandBus, CommandBus>();
+            services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
+            
             services.AddScoped<IProductViews, ProductQueryRepository>();
+            services.AddScoped<IProducts, ProductCommandRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [UsedImplicitly] // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

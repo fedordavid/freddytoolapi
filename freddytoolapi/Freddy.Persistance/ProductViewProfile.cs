@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
-using Freddy.Application;
-using Freddy.Application.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Freddy.Application.Queries.Products;
+using Freddy.Persistance.Entities;
+using JetBrains.Annotations;
 
 namespace Freddy.Persistance
 {
+    [UsedImplicitly]
     public class ProductViewProfile : Profile
     {
         public ProductViewProfile()

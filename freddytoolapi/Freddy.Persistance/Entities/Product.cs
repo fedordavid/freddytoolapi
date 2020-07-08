@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace Freddy.Application
+namespace Freddy.Persistance.Entities
 {
     public class Product
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        
         public string Code { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }

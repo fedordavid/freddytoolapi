@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Freddy.Application.Models;
 using Freddy.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Freddy.Application.Queries.Products;
 
 namespace Freddy.Persistance
 {

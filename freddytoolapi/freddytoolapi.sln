@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.Application", "Fredd
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.API", "Freddy.API\Freddy.API.csproj", "{820857B7-BFB6-4449-85B2-BCE9C77C24F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freddy.UnitTests", "Freddy.UnitTests\Freddy.UnitTests.csproj", "{515674A7-9214-4EE0-A6AC-4D80009858D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freddy.IntegrationTests", "Freddy.IntegrationTests\Freddy.IntegrationTests.csproj", "{7A023D73-7FEA-4398-B9BF-CD67141FA15F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D7244774-B067-412A-BCEC-9FE2AED9A871}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,11 +39,23 @@ Global
 		{820857B7-BFB6-4449-85B2-BCE9C77C24F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{820857B7-BFB6-4449-85B2-BCE9C77C24F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{820857B7-BFB6-4449-85B2-BCE9C77C24F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515674A7-9214-4EE0-A6AC-4D80009858D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515674A7-9214-4EE0-A6AC-4D80009858D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515674A7-9214-4EE0-A6AC-4D80009858D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515674A7-9214-4EE0-A6AC-4D80009858D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A023D73-7FEA-4398-B9BF-CD67141FA15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A023D73-7FEA-4398-B9BF-CD67141FA15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A023D73-7FEA-4398-B9BF-CD67141FA15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A023D73-7FEA-4398-B9BF-CD67141FA15F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02C81C21-60E7-4ABF-966A-7578F5B6A038}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A023D73-7FEA-4398-B9BF-CD67141FA15F} = {D7244774-B067-412A-BCEC-9FE2AED9A871}
+		{515674A7-9214-4EE0-A6AC-4D80009858D2} = {D7244774-B067-412A-BCEC-9FE2AED9A871}
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,6 @@ namespace Freddy.Application.Core.Commands
 {
     public interface IHandleCommands<in TCommand> where TCommand : Command
     {
-        Task Execute(TCommand command);
+        Task Handle(TCommand command);
     }
 }

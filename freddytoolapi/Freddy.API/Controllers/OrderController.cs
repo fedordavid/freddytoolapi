@@ -39,5 +39,12 @@ namespace Freddy.API.Controllers
             await _commandBus.Handle(new AddProductCommand(productId, productInfo));
             return CreatedAtAction(nameof(GetProductById), new {productId}, null);
         }
+
+        [HttpDelete("api/freddy/products/{productId}")]
+        public async Task<ActionResult> DeleteProduct(Guid productId)
+        {
+            await _commandBus.Handle(new DeleteProductCommand(productId));
+            return Ok();
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Freddy.Application.Core.Commands
         {
             var executor = _serviceProvider.GetService<IHandleCommands<TCommand>>();
 
-            return executor.Execute(command);
+            return executor.Handle(command);
         }
     }
 }

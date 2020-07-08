@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
 using Freddy.Persistance.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Freddy.Persistance
 {
@@ -26,6 +29,14 @@ namespace Freddy.Persistance
             });
 
             return _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(Guid productId)
+        {
+            var product = await _context.Products.FirstAsync(p => p.Id == productId);
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
         }
     }
 }

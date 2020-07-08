@@ -12,7 +12,7 @@ namespace Freddy.Application.Commands.Products
             _products = products;
         }
 
-        public Task Execute(AddProductCommand command)
+        public Task Handle(AddProductCommand command)
         {
             return _products.Add(new Product(command.Id, command.Info));
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -109,7 +110,29 @@ namespace Freddy.Application.UnitTests.API.Controllers
             
             _commandBusMock.Verify(b => b.Handle(It.Is(MatchingProductInfo(info))), Times.Once);
         }
-        
+
+        [Fact]
+        public async Task DeleteProduct_ShouldReturn200()
+        {
+            var productId = Guid.NewGuid();
+            var url = $"api/freddy/products/{productId}";
+
+            var response = await _client.DeleteAsync(url);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteProduct_ShouldExecuteDeleteProductCommand()
+        {
+            var productId = Guid.NewGuid();
+            var url = $"api/freddy/products/{productId}";
+
+            var response = await _client.DeleteAsync(url);
+
+            _commandBusMock.Verify(c => c.Handle(It.Is<DeleteProductCommand>(cmd => cmd.ProductId == productId)), Times.Once);
+        }
+
         private Expression<Func<AddProductCommand, bool>> MatchingProductInfo(ProductInfo info)
         {
             return cmd => cmd.Info.Code == info.Code

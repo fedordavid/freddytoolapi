@@ -37,6 +37,7 @@ namespace Freddy.Host
             
             services.AddScoped<ICommandBus, CommandBus>();
             services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
+            services.AddScoped<IHandleCommands<DeleteProductCommand>, DeleteProduct>();
             
             services.AddScoped<IProductViews, ProductQueryRepository>();
             services.AddScoped<IProducts, ProductCommandRepository>();

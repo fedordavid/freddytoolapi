@@ -23,7 +23,7 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
             var productId = new Guid("5412D947-05DB-45AE-AA20-6ADA289FBA0E");
             var productInfo = new ProductInfo("code", "name", "size");
 
-            _addProduct.Execute(new AddProductCommand(productId, productInfo));
+            _addProduct.Handle(new AddProductCommand(productId, productInfo));
             
             _productsMock.Verify(cmd => cmd.Add(It.Is(EqualTo(productId, productInfo))), Times.Once);
         }

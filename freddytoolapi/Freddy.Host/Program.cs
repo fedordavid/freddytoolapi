@@ -18,7 +18,7 @@ namespace Freddy.Host
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                // context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 context.Database.Migrate();
             }
             

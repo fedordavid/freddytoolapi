@@ -5,7 +5,7 @@ using Freddy.Persistance.Entities;
 
 namespace Freddy.IntegrationTests.TestData
 {
-    public class Products
+    internal sealed class Products
     {
         public void Initialize(DatabaseContext context)
         {
@@ -15,7 +15,7 @@ namespace Freddy.IntegrationTests.TestData
 
             context.SaveChanges();
         }
-        
+
         public IEnumerable<Product> SeedData()
         {
             yield return new Product()

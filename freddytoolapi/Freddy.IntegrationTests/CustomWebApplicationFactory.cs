@@ -31,7 +31,7 @@ namespace Freddy.IntegrationTests
             builder.ConfigureServices(services =>
             {
                 services.RemoveAll(typeof(DbContextOptions<DatabaseContext>));
-                services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(testDbConnectionString), ServiceLifetime.Singleton);
+                services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(testDbConnectionString));
             });
         }
 

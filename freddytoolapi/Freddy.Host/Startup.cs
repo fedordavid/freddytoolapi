@@ -13,6 +13,7 @@ using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Products;
 using JetBrains.Annotations;
+using Freddy.Application.Commands.Products.UpdateProduct;
 
 namespace Freddy.Host
 {
@@ -38,6 +39,7 @@ namespace Freddy.Host
             services.AddScoped<ICommandBus, CommandBus>();
             services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
             services.AddScoped<IHandleCommands<DeleteProductCommand>, DeleteProduct>();
+            services.AddScoped<IHandleCommands<UpdateProductCommand>, UpdateProduct>();
             
             services.AddScoped<IProductViews, ProductQueryRepository>();
             services.AddScoped<IProducts, ProductCommandRepository>();

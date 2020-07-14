@@ -7,6 +7,8 @@ using Freddy.Application.Commands.Products;
 using Freddy.Application.Queries.Products;
 using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
+using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -80,6 +82,24 @@ namespace Freddy.IntegrationTests.Controllers
             var views = await _client.GetObjectAsync<ProductView[]>($"api/freddy/products");
 
             Assert.DoesNotContain(views, c => c.Code == info.Code);
+        }
+
+        [Fact]
+        public async Task PutProduct_ShouldHaveUpdatedProperties()
+        {
+            var createProductUrl = $"api/freddy/products";
+            var createProductInfo = new ProductInfo("S0WTRD2", "FREDDY training női pamut ruha- lila", "L");
+            var createProductResponse = await _client.PostObjectAsync(createProductUrl, createProductInfo);
+            var createProductResult = await _client.GetObjectAsync<ProductView>(createProductResponse.Headers.Location.LocalPath);
+
+            var updateProductUrl = $"api/freddy/products/{createProductResult.Id}";
+            var updateProductInfo = new ProductInfo("S0WTRD3", "FREDDY training női pamut ruha- fekete", "M");
+            var updateProductResponse = await _client.PutObjectAsync(updateProductUrl, updateProductInfo);
+            var updateProductResult = await _client.GetObjectAsync<ProductView>(updateProductResponse.Headers.Location.LocalPath);
+
+            Assert.Equal(updateProductInfo.Code, updateProductResult.Code);
+            Assert.Equal(updateProductInfo.Name, updateProductResult.Name);
+            Assert.Equal(updateProductInfo.Size, updateProductResult.Size);
         }
     }
 }

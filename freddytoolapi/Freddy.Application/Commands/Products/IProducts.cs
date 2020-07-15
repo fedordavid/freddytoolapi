@@ -7,5 +7,6 @@ namespace Freddy.Application.Commands.Products
     {
         Task Add(Product product);
         Task Delete(Guid productId);
+        Task Update(Product product);
     }
 }

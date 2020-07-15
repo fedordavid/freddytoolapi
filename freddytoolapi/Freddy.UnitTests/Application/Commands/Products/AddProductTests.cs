@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Freddy.Application.Commands.Products;
+using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using Xunit;
 
@@ -25,15 +26,7 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
 
             _addProduct.Handle(new AddProductCommand(productId, productInfo));
             
-            _productsMock.Verify(cmd => cmd.Add(It.Is(EqualTo(productId, productInfo))), Times.Once);
-        }
-
-        private static Expression<Func<Product, bool>> EqualTo(Guid id, ProductInfo info)
-        {
-            return p => p.Id == id
-                && p.Info.Code == info.Code
-                && p.Info.Name == info.Name
-                && p.Info.Size == info.Size;
+            _productsMock.Verify(cmd => cmd.Add(It.Is(Helpers.EqualTo(productId, productInfo))), Times.Once);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
+using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Products;
@@ -131,6 +132,28 @@ namespace Freddy.Application.UnitTests.API.Controllers
             var response = await _client.DeleteAsync(url);
 
             _commandBusMock.Verify(c => c.Handle(It.Is<DeleteProductCommand>(cmd => cmd.ProductId == productId)), Times.Once);
+        }
+
+        [Fact]
+        public async Task PutProduct_ShouldExecuteUpdateProductCommand()
+        {
+            var updateProductGuid = Guid.NewGuid();
+            var updateProductUrl = $"api/freddy/products/{updateProductGuid}";
+            var updateProductResponse = await _client.PutObjectAsync(updateProductUrl, new { });
+
+            _commandBusMock.Verify(c => c.Handle(It.Is<UpdateProductCommand>(cmd => cmd.Id == updateProductGuid)), Times.Once);
+        }
+
+        [Fact]
+        public async Task PutProduct_ShouldReturnLocation()
+        {
+            var productId = Guid.NewGuid();
+            var url = $"api/freddy/products/{productId}";
+
+            var response = await _client.PutObjectAsync(url, new { });
+
+            Assert.NotEmpty(response.Headers.Location.LocalPath);
+            Assert.NotNull(response.Headers.Location.LocalPath);
         }
 
         private Expression<Func<AddProductCommand, bool>> MatchingProductInfo(ProductInfo info)

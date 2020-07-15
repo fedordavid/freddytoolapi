@@ -27,5 +27,14 @@ namespace Freddy.Application.UnitTests.Utilities
             response.EnsureSuccessStatusCode();
             return response;
         }
+
+        public static async Task<HttpResponseMessage> PutObjectAsync<TObject>(this HttpClient client, string url, TObject o)
+        {
+            var payload = JsonSerializer.Serialize(o, Options);
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(url, content);
+            response.EnsureSuccessStatusCode();
+            return response;
+        }
     }
 }

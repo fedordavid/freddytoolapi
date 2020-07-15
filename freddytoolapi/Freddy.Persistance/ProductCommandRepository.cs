@@ -38,5 +38,21 @@ namespace Freddy.Persistance
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
+
+        public async Task Update(Product product)
+        {
+            var info = product.Info;
+
+            _context.Products.Update(new Entities.Product
+            {
+                Code = info.Code,
+                Id = product.Id,
+                Name = info.Name,
+                Size = info.Size
+            });
+
+            await _context.SaveChangesAsync();
+
+        }
     }
 }

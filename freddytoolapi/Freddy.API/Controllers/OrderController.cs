@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
+using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Products;
@@ -45,6 +46,13 @@ namespace Freddy.API.Controllers
         {
             await _commandBus.Handle(new DeleteProductCommand(productId));
             return Ok();
+        }
+
+        [HttpPut("api/freddy/products/{productId}")]
+        public async Task<ActionResult> UpdateProduct(Guid productId, ProductInfo productInfo)
+        {
+            await _commandBus.Handle(new UpdateProductCommand(productId, productInfo));
+            return CreatedAtAction(nameof(GetProductById), new { productId }, null);
         }
     }
 }

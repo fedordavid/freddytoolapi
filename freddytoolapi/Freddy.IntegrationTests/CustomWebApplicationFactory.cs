@@ -1,4 +1,4 @@
-﻿using Freddy.Application.Core.Queries;
+﻿using Freddy.IntegrationTests.TestData;
 using Freddy.Persistance.DbContexts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Moq;
 
 using HostBuilder = Microsoft.Extensions.Hosting.Host;
 
@@ -17,20 +17,21 @@ namespace Freddy.IntegrationTests
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
         where TStartup : class
     {
-        public Mock<IQueryBus> QueryBusMock { get; } = new Mock<IQueryBus>();
-        
         protected override IHostBuilder CreateHostBuilder()
         {
             return HostBuilder
                 .CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(x => x.UseStartup<TStartup>().UseTestServer());
         }
-        
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            const string testDbConnectionString = "Server=(localdb)\\mssqllocaldb;Database=freddydb-test;Trusted_Connection=True;";
+            
             builder.ConfigureServices(services =>
             {
-                services.AddScoped(_ => QueryBusMock.Object);
+                services.RemoveAll(typeof(DbContextOptions<DatabaseContext>));
+                services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(testDbConnectionString));
             });
         }
 
@@ -41,7 +42,8 @@ namespace Freddy.IntegrationTests
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                context.Database.EnsureDeleted();
+                new Products().Initialize(context);
+                //context.Database.EnsureDeleted();
                 context.Database.Migrate();
             }
             

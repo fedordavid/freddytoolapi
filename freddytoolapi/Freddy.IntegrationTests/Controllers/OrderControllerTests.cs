@@ -9,20 +9,23 @@ using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using Freddy.Persistance.DbContexts;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using Xunit.Abstractions;
+
+using Product = Freddy.Persistance.Entities.Product;
 
 namespace Freddy.IntegrationTests.Controllers
 {
     public class OrderControllerTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly HttpClient _client;
+        private readonly IServiceProvider _services;
 
-        public OrderControllerTests(CustomWebApplicationFactory<Startup> factory, ITestOutputHelper testOutputHelper)
+        public OrderControllerTests(CustomWebApplicationFactory<Startup> factory)
         {
-            _testOutputHelper = testOutputHelper;
             _client = factory.CreateClient();
+            _services = factory.Services;
         }
         
         [Fact]
@@ -43,20 +46,55 @@ namespace Freddy.IntegrationTests.Controllers
             var result = await _client.GetObjectAsync<ProductView[]>(url);
             
             Assert.Equal(2, result.Length);
+            // TODO: Compare with TestData 
         }
         
         [Fact]
-        public async Task PostProduct_ShouldBeAccessibleFromReturnedLocation()
+        public async Task PostProduct_ShouldReturn201()
         {
             var url = $"api/freddy/products";
             var info = new ProductInfo("code", "name", "size");
             
             var response = await _client.PostObjectAsync(url, info);
-            var result = await _client.GetObjectAsync<ProductView>(response.Headers.Location.LocalPath);
             
-            Assert.Equal(info.Code, result.Code);
-            Assert.Equal(info.Name, result.Name);
-            Assert.Equal(info.Size, result.Size);
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        }
+        
+        [Fact]
+        public async Task PostProduct_ShouldReturnLocationToGetProduct()
+        {
+            var url = $"api/freddy/products";
+            var info = new ProductInfo("code", "name", "size");
+            
+            var response = await _client.PostObjectAsync(url, info);
+
+            var location = response.Headers.Location;
+            var returnedUrl = string.Concat(location.Segments.SkipLast(1)).Trim('/');
+            var productId = location.Segments.Last();
+
+            Assert.Equal(url, returnedUrl);
+            Assert.True(Guid.TryParse(productId, out _));
+        }
+        
+        [Fact]
+        public async Task PostProduct_ShouldAddProductToDatabase()
+        {
+            var url = $"api/freddy/products";
+            var info = new ProductInfo("code", "name", "size");
+            
+            var response = await _client.PostObjectAsync(url, info);
+
+            var location = response.Headers.Location;
+            var productId = new Guid(location.Segments.Last());
+
+            await using (var ctx = CreateDatabaseContext())
+            {
+                var product = await ctx.Products.FindAsync(productId);
+                Assert.NotNull(product);
+                Assert.Equal(product.Code, info.Code);
+                Assert.Equal(product.Name, info.Name);
+                Assert.Equal(product.Size, info.Size);
+            }
         }
 
         [Fact]
@@ -69,19 +107,26 @@ namespace Freddy.IntegrationTests.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-
+        
         [Fact]
-        public async Task DeleteProduct_ShouldDeleteProductByProductId()
+        public async Task DeleteProduct_ShouldDeleteProductFromDatabase()
         {
-            var url = $"api/freddy/products";
-            var info = new ProductInfo("code", "name", "size");
-            var response = await _client.PostObjectAsync(url, info);
+            var productId = new Guid("17088A6C-68A4-484E-901A-FA60665D99DE");
+            var url = $"api/freddy/products/{productId}";
 
-            await _client.DeleteAsync(response.Headers.Location.LocalPath);
+            await using (var ctx = CreateDatabaseContext())
+            {
+                await ctx.Products.AddAsync(new Product { Id = productId });
+                await ctx.SaveChangesAsync();
+            }
+            
+            await _client.DeleteAsync(url);
 
-            var views = await _client.GetObjectAsync<ProductView[]>($"api/freddy/products");
-
-            Assert.DoesNotContain(views, c => c.Code == info.Code);
+            await using (var ctx = CreateDatabaseContext())
+            {
+                var product = await ctx.Products.FindAsync(productId);
+                Assert.Null(product);
+            }
         }
 
         [Fact]
@@ -101,5 +146,8 @@ namespace Freddy.IntegrationTests.Controllers
             Assert.Equal(updateProductInfo.Name, updateProductResult.Name);
             Assert.Equal(updateProductInfo.Size, updateProductResult.Size);
         }
+
+        private DatabaseContext CreateDatabaseContext()
+            => _services.CreateScope().ServiceProvider.GetRequiredService<DatabaseContext>();
     }
 }

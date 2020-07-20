@@ -52,7 +52,7 @@ namespace Freddy.API.Controllers
         public async Task<ActionResult> UpdateProduct(Guid productId, ProductInfo productInfo)
         {
             await _commandBus.Handle(new UpdateProductCommand(productId, productInfo));
-            return CreatedAtAction(nameof(GetProductById), new { productId }, null);
+            return Ok();
         }
     }
 }

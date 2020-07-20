@@ -130,21 +130,31 @@ namespace Freddy.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task PutProduct_ShouldHaveUpdatedProperties()
+        public async Task PutProduct_ShouldReturn200()
         {
-            var createProductUrl = $"api/freddy/products";
-            var createProductInfo = new ProductInfo("S0WTRD2", "FREDDY training női pamut ruha- lila", "L");
-            var createProductResponse = await _client.PostObjectAsync(createProductUrl, createProductInfo);
-            var createProductResult = await _client.GetObjectAsync<ProductView>(createProductResponse.Headers.Location.LocalPath);
-
-            var updateProductUrl = $"api/freddy/products/{createProductResult.Id}";
+            var productId = new Guid("E8E060D6-5CFC-4009-B150-C0870CC45464");
+            var updateProductUrl = $"api/freddy/products/{productId}";
             var updateProductInfo = new ProductInfo("S0WTRD3", "FREDDY training női pamut ruha- fekete", "M");
             var updateProductResponse = await _client.PutObjectAsync(updateProductUrl, updateProductInfo);
-            var updateProductResult = await _client.GetObjectAsync<ProductView>(updateProductResponse.Headers.Location.LocalPath);
 
-            Assert.Equal(updateProductInfo.Code, updateProductResult.Code);
-            Assert.Equal(updateProductInfo.Name, updateProductResult.Name);
-            Assert.Equal(updateProductInfo.Size, updateProductResult.Size);
+            Assert.Equal(HttpStatusCode.OK, updateProductResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutProduct_ShouldHaveUpdatedProperties()
+        {
+            var productId = new Guid("E8E060D6-5CFC-4009-B150-C0870CC45464");
+            var updateProductUrl = $"api/freddy/products/{productId}";
+            var updateProductInfo = new ProductInfo("S0WTRD3", "FREDDY training női pamut ruha- fekete", "M");
+            await _client.PutObjectAsync(updateProductUrl, updateProductInfo);
+
+            await using (var ctx = CreateDatabaseContext())
+            {
+                var product = await ctx.Products.FindAsync(productId);
+                Assert.Equal(updateProductInfo.Code, product.Code);
+                Assert.Equal(updateProductInfo.Name, product.Name);
+                Assert.Equal(updateProductInfo.Size, product.Size);
+            }
         }
 
         private DatabaseContext CreateDatabaseContext()

@@ -15,9 +15,11 @@ namespace Freddy.Application.Commands.Products.UpdateProduct
             _products = products;
         }
 
-        public Task Handle(UpdateProductCommand command)
+        public async Task Handle(UpdateProductCommand command)
         {
-            return  _products.Update(new Product(command.Id, command.ProductInfo));
+            var product = await _products.Get(command.Id);
+            var updatedProduct = product.With(command.ProductInfo);
+            await _products.Update(updatedProduct);
         }
     }
 }

@@ -39,20 +39,23 @@ namespace Freddy.Persistance
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Product> Get(Guid productId)
+        {
+            var productEntity = await _context.Products.FindAsync(productId);
+            var productInfo = new ProductInfo(productEntity.Code, productEntity.Name, productEntity.Size);
+            return new Product(productEntity.Id, productInfo);
+        }
+
         public async Task Update(Product product)
         {
             var info = product.Info;
+            var productEntity = await _context.Products.FindAsync(product.Id);
 
-            _context.Products.Update(new Entities.Product
-            {
-                Code = info.Code,
-                Id = product.Id,
-                Name = info.Name,
-                Size = info.Size
-            });
+            productEntity.Code = info.Code;
+            productEntity.Name = info.Name;
+            productEntity.Size = info.Size;
 
             await _context.SaveChangesAsync();
-
         }
     }
 }

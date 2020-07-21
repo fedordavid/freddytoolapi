@@ -11,6 +11,7 @@ namespace Freddy.Persistance.DbContexts
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,8 +29,16 @@ namespace Freddy.Persistance.DbContexts
                     Code = "WRUP1LC001, N",
                     Name = "Fekete pamut nadrág- csípő",
                     Size = "XL"
-                }) ;
-            // seed the database with dummy data
+                });
+
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer()
+                {
+                    Id = new Guid("8E704345-26BC-4091-A9CC-0CA052C03556"),
+                    Name = "Ilosfai-Pataki Júlia",
+                    Email = "ipj@humail.hu",
+                    Phone = "+36 900 800 4445"
+                });
         }
     }
 }

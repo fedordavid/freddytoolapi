@@ -14,6 +14,9 @@ using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Products;
 using JetBrains.Annotations;
 using Freddy.Application.Commands.Products.UpdateProduct;
+using Freddy.Application.Queries.Customers;
+using Freddy.Application.Queries.Customers.GetAllCustomers;
+using Freddy.Application.Queries;
 
 namespace Freddy.Host
 {
@@ -35,13 +38,15 @@ namespace Freddy.Host
             services.AddScoped<IQueryBus, QueryBus>();
             services.AddScoped<IExecuteQuery<GetAllProductsQuery, ProductView[]>, GetAllProducts>();
             services.AddScoped<IExecuteQuery<GetProductByIdQuery, ProductView>, GetProductById>();
-            
+            services.AddScoped<IExecuteQuery<GetAllCustomersQuery, CustomerView[]>, GetAllCustomers>();
+
             services.AddScoped<ICommandBus, CommandBus>();
             services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
             services.AddScoped<IHandleCommands<DeleteProductCommand>, DeleteProduct>();
             services.AddScoped<IHandleCommands<UpdateProductCommand>, UpdateProduct>();
-            
+
             services.AddScoped<IProductViews, ProductQueryRepository>();
+            services.AddScoped<ICustomerViews, CustomerQueryRepository>();
             services.AddScoped<IProducts, ProductCommandRepository>();
         }
 

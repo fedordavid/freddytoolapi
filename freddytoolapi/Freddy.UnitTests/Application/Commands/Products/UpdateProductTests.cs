@@ -40,6 +40,8 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
             var productId = new Guid("e8e060d6-5cfc-4009-b150-c0870cc45464");
             var productInfo = new ProductInfo("change-code", "change-name", "change-size");
 
+            _MockProducts.Setup(s => s.Get(productId)).ReturnsAsync(new Product(productId, new ProductInfo()));
+
             await _updateProduct.Handle(new UpdateProductCommand(productId, productInfo));
             _MockProducts.Verify(products => products.Get(productId), Times.Once);
         }

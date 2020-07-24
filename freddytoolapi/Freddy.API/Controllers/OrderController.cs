@@ -56,11 +56,5 @@ namespace Freddy.API.Controllers
             await _commandBus.Handle(new UpdateProductCommand(productId, productInfo));
             return Ok();
         }
-
-        [HttpGet("api/freddy/customers")]
-        public async Task<ActionResult<CustomerView[]>> GetAllCustomers()
-        {
-            return await _queryBus.Execute(new GetAllCustomersQuery());
-        }
     }
 }

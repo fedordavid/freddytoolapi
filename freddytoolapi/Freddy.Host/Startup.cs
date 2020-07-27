@@ -1,23 +1,12 @@
-using AutoMapper;
 using Freddy.Persistance;
-using Freddy.Persistance.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using Freddy.Application.Commands.Products;
-using Freddy.Application.Core.Commands;
-using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Products;
+using Freddy.API;
+using Freddy.Application;
 using JetBrains.Annotations;
-using Freddy.Application.Commands.Products.UpdateProduct;
-using Freddy.Application.Queries.Customers;
-using Freddy.Application.Queries.Customers.GetAllCustomers;
-using Freddy.Application.Queries;
-using Freddy.Application.Commands.Customers;
 
 namespace Freddy.Host
 {
@@ -32,25 +21,10 @@ namespace Freddy.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddAutoMapper(typeof(ProductViewProfile));
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(_configuration.GetConnectionString("Database")));
-
-            services.AddScoped<IQueryBus, QueryBus>();
-            services.AddScoped<IExecuteQuery<GetAllProductsQuery, ProductView[]>, GetAllProducts>();
-            services.AddScoped<IExecuteQuery<GetProductByIdQuery, ProductView>, GetProductById>();
-            services.AddScoped<IExecuteQuery<GetAllCustomersQuery, CustomerView[]>, GetAllCustomers>();
-
-            services.AddScoped<ICommandBus, CommandBus>();
-            services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
-            services.AddScoped<IHandleCommands<DeleteProductCommand>, DeleteProduct>();
-            services.AddScoped<IHandleCommands<UpdateProductCommand>, UpdateProduct>();
-            services.AddScoped<IHandleCommands<DeleteCustomerCommand>, DeleteCustomer>();
-
-            services.AddScoped<IProductViews, ProductQueryRepository>();
-            services.AddScoped<ICustomerViews, CustomerQueryRepository>();
-            services.AddScoped<IProducts, ProductCommandRepository>();
-            services.AddScoped<ICustomers, CustomerCommandRepository>();
+            services.AddApi();
+            services.AddQueries();
+            services.AddCommands();
+            services.AddPersistence(_configuration);
         }
 
         [UsedImplicitly] // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +36,7 @@ namespace Freddy.Host
             }
 
             app.UseRouting();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

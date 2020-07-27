@@ -1,8 +1,6 @@
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistance;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HostBuilder = Microsoft.Extensions.Hosting.Host;
 
@@ -15,12 +13,7 @@ namespace Freddy.Host
         {
             var host = CreateHostBuilder(args).Build();
             
-            using (var scope = host.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                //context.Database.EnsureDeleted();
-                context.Database.Migrate();
-            }
+            PersistenceInitializer.Initialize(host.Services);
             
             host.Run();
         }

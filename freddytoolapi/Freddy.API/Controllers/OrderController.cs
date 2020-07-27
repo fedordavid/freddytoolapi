@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Freddy.API.Core;
 using Freddy.Application.Commands.Products;
 using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
@@ -16,11 +17,13 @@ namespace Freddy.API.Controllers
     {
         private readonly IQueryBus _queryBus;
         private readonly ICommandBus _commandBus;
+        private readonly IGuidProvider _guidProvider;
 
-        public OrderController(IQueryBus queryBus, ICommandBus commandBus)
+        public OrderController(IQueryBus queryBus, ICommandBus commandBus, IGuidProvider guidProvider)
         {
             _queryBus = queryBus;
             _commandBus = commandBus;
+            _guidProvider = guidProvider;
         }
 
         [HttpGet("api/freddy/products/{productId}")]
@@ -38,7 +41,7 @@ namespace Freddy.API.Controllers
         [HttpPost("api/freddy/products")]
         public async Task<ActionResult> PostProduct(ProductInfo productInfo)
         {
-            var productId = Guid.NewGuid();
+            var productId = _guidProvider.NewGuid();
             await _commandBus.Handle(new AddProductCommand(productId, productInfo));
             return CreatedAtAction(nameof(GetProductById), new {productId}, null);
         }

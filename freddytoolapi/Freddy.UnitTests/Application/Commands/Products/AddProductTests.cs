@@ -26,7 +26,7 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
 
             _addProduct.Handle(new AddProductCommand(productId, productInfo));
             
-            _productsMock.Verify(cmd => cmd.Add(It.Is(Helpers.EqualTo(productId, productInfo))), Times.Once);
+            _productsMock.Verify(products => products.Add(It.Is(A.Product.With(productId, productInfo))), Times.Once);
         }
     }
 }

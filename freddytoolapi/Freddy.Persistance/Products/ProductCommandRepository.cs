@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
 using Freddy.Persistance.DbContexts;
-using Microsoft.EntityFrameworkCore;
 
-namespace Freddy.Persistance
+namespace Freddy.Persistance.Products
 {
     public class ProductCommandRepository : IProducts
     {
@@ -20,7 +18,7 @@ namespace Freddy.Persistance
         {
             var info = product.Info;
 
-            _context.Products.Add(new Entities.Product
+            _context.Products.Add(new ProductEntity
             {
                 Code = info.Code,
                 Id = product.Id,
@@ -33,15 +31,22 @@ namespace Freddy.Persistance
 
         public async Task Delete(Guid productId)
         {
-            var product = await _context.Products.FirstAsync(p => p.Id == productId);
+            var productEntity = await _context.Products.FindAsync(productId);
 
-            _context.Products.Remove(product);
+            if (productEntity is null)
+                return;
+            
+            _context.Products.Remove(productEntity);
             await _context.SaveChangesAsync();
         }
 
         public async Task<Product> Get(Guid productId)
         {
             var productEntity = await _context.Products.FindAsync(productId);
+
+            if (productEntity is null)
+                return null;
+            
             var productInfo = new ProductInfo(productEntity.Code, productEntity.Name, productEntity.Size);
             return new Product(productEntity.Id, productInfo);
         }

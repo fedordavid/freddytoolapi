@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Freddy.Application.Queries;
 using Freddy.Application.Queries.Customers;
 using Freddy.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
-namespace Freddy.Persistance
+namespace Freddy.Persistance.Customers
 {
     public class CustomerQueryRepository : ICustomerViews
     {

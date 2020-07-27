@@ -18,6 +18,10 @@ namespace Freddy.Application.Commands.Products.UpdateProduct
         public async Task Handle(UpdateProductCommand command)
         {
             var product = await _products.Get(command.Id);
+
+            if (product is null)
+                throw new NotFoundException();
+            
             var updatedProduct = product.With(command.ProductInfo);
             await _products.Update(updatedProduct);
         }

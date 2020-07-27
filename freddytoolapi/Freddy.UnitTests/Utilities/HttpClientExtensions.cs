@@ -24,7 +24,6 @@ namespace Freddy.Application.UnitTests.Utilities
             var payload = JsonSerializer.Serialize(o, Options);
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(url, content);
-            response.EnsureSuccessStatusCode();
             return response;
         }
 
@@ -33,7 +32,6 @@ namespace Freddy.Application.UnitTests.Utilities
             var payload = JsonSerializer.Serialize(o, Options);
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
             var response = await client.PutAsync(url, content);
-            response.EnsureSuccessStatusCode();
             return response;
         }
     }

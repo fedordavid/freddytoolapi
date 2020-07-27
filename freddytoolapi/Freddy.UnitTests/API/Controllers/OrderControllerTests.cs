@@ -145,15 +145,14 @@ namespace Freddy.Application.UnitTests.API.Controllers
         }
 
         [Fact]
-        public async Task PutProduct_ShouldReturnLocation()
+        public async Task PutProduct_ShouldReturn200()
         {
             var productId = Guid.NewGuid();
             var url = $"api/freddy/products/{productId}";
 
             var response = await _client.PutObjectAsync(url, new { });
 
-            Assert.NotEmpty(response.Headers.Location.LocalPath);
-            Assert.NotNull(response.Headers.Location.LocalPath);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         private Expression<Func<AddProductCommand, bool>> MatchingProductInfo(ProductInfo info)

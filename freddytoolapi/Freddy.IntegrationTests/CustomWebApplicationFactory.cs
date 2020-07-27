@@ -27,7 +27,7 @@ namespace Freddy.IntegrationTests
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             const string testDbConnectionString = "Server=(localdb)\\mssqllocaldb;Database=freddydb-test;Trusted_Connection=True;";
-            
+
             builder.ConfigureServices(services =>
             {
                 services.RemoveAll(typeof(DbContextOptions<DatabaseContext>));
@@ -38,15 +38,16 @@ namespace Freddy.IntegrationTests
         protected override IHost CreateHost(IHostBuilder builder)
         {
             var host = CreateHostBuilder().Build();
-            
+
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                new Products().Initialize(context);
                 //context.Database.EnsureDeleted();
                 context.Database.Migrate();
+                new Products().Initialize(context);
+                new Customers().Initialize(context);
             }
-            
+
             host.Start();
 
             return host;

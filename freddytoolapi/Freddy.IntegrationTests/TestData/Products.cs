@@ -10,7 +10,7 @@ namespace Freddy.IntegrationTests.TestData
         public void Initialize(DatabaseContext context)
         {
             context.Products.RemoveRange(context.Products);
-            
+
             context.Products.AddRange(SeedData());
 
             context.SaveChanges();

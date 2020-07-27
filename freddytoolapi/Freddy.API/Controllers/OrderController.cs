@@ -4,6 +4,8 @@ using Freddy.Application.Commands.Products;
 using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
+using Freddy.Application.Queries.Customers;
+using Freddy.Application.Queries.Customers.GetAllCustomers;
 using Freddy.Application.Queries.Products;
 using Microsoft.AspNetCore.Mvc;
 

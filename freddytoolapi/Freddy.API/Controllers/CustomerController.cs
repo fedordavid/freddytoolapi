@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Freddy.Application.Commands.Customers;
 using Freddy.Application.Commands.Products;
 using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
@@ -27,6 +28,12 @@ namespace Freddy.API.Controllers
         public async Task<ActionResult<CustomerView[]>> GetAllCustomers()
         {
             return await _queryBus.Execute(new GetAllCustomersQuery());
+        }
+
+        [HttpDelete("api/freddy/customers/{customerId}")]
+        public async Task DeleteCustomer(Guid customerId)
+        {
+            await _commandBus.Handle(new DeleteCustomerCommand(customerId));
         }
     }
 }

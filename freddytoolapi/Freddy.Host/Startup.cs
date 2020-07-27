@@ -17,6 +17,7 @@ using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Customers.GetAllCustomers;
 using Freddy.Application.Queries;
+using Freddy.Application.Commands.Customers;
 
 namespace Freddy.Host
 {
@@ -44,10 +45,12 @@ namespace Freddy.Host
             services.AddScoped<IHandleCommands<AddProductCommand>, AddProduct>();
             services.AddScoped<IHandleCommands<DeleteProductCommand>, DeleteProduct>();
             services.AddScoped<IHandleCommands<UpdateProductCommand>, UpdateProduct>();
+            services.AddScoped<IHandleCommands<DeleteCustomerCommand>, DeleteCustomer>();
 
             services.AddScoped<IProductViews, ProductQueryRepository>();
             services.AddScoped<ICustomerViews, CustomerQueryRepository>();
             services.AddScoped<IProducts, ProductCommandRepository>();
+            services.AddScoped<ICustomers, CustomerCommandRepository>();
         }
 
         [UsedImplicitly] // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

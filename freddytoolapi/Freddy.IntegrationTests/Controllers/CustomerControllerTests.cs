@@ -25,11 +25,39 @@ namespace Freddy.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task DeleteCustomer_ShouldReturn200()
+        public async Task GetAllCustomers_ShouldReturn200()
         {
             const string url = "api/freddy/customers";
 
             var response = await _client.GetAsync(url);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task GetAllCustomers_ShouldReturnDataFromDatabase()
+        {
+            const string url = "api/freddy/customers";
+
+            var result = await _client.GetObjectAsync<CustomerView[]>(url);
+
+            Assert.Equal(2, result.Length);
+            // TODO: Compare with TestData 
+        }
+
+        [Fact]
+        public async Task DeleteCustomer_ShouldReturn200()
+        {
+            var customerId = new Guid("59D178FE-3727-4B67-ABA1-D573BC40C81A");
+            var url = $"api/freddy/customers/{customerId}";
+
+            await using (var ctx = CreateDatabaseContext())
+            {
+                await ctx.Customers.AddAsync(new Customer { Id = customerId });
+                await ctx.SaveChangesAsync();
+            }
+
+            var response = await _client.DeleteAsync(url);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -43,7 +71,7 @@ namespace Freddy.IntegrationTests.Controllers
 
                 await using (var ctx = CreateDatabaseContext())
                 {
-                    await ctx.Customers.AddAsync(new Customer { Id = customerId});
+                    await ctx.Customers.AddAsync(new Customer { Id = customerId });
                     await ctx.SaveChangesAsync();
                 }
 

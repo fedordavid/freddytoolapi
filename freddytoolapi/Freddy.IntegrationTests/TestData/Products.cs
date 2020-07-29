@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Freddy.Persistance.DbContexts;
-using Freddy.Persistance.Entities;
+using Freddy.Persistance.Products;
 
 namespace Freddy.IntegrationTests.TestData
 {
@@ -16,9 +16,9 @@ namespace Freddy.IntegrationTests.TestData
             context.SaveChanges();
         }
 
-        public IEnumerable<Product> SeedData()
+        public IEnumerable<ProductEntity> SeedData()
         {
-            yield return new Product()
+            yield return new ProductEntity()
             {
                 Id = new Guid("E8E060D6-5CFC-4009-B150-C0870CC45464"),
                 Code = "WRUP1LC001, P4",
@@ -26,7 +26,7 @@ namespace Freddy.IntegrationTests.TestData
                 Size = "M"
             };
 
-            yield return new Product()
+            yield return new ProductEntity()
             {
                 Id = new Guid("3B50451A-05D1-4E96-A2D7-7FF1E2CCA09F"),
                 Code = "WRUP1LC001, N",

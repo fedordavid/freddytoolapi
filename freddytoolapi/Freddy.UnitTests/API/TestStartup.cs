@@ -1,4 +1,5 @@
-﻿using Freddy.API.Controllers;
+﻿using Freddy.API;
+using Freddy.API.Controllers;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +12,7 @@ namespace Freddy.Application.UnitTests.API
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddApplicationPart(typeof(OrderController).Assembly);
+            services.AddApi().AddApplicationPart(typeof(OrderController).Assembly);
         }
 
         [UsedImplicitly]

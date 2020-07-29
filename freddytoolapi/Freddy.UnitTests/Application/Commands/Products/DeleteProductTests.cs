@@ -25,7 +25,7 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
 
             _deleteProduct.Handle(new DeleteProductCommand(productId));
 
-            _productsMock.Verify(cmd => cmd.Delete(productId), Times.Once);
+            _productsMock.Verify(products => products.Delete(productId), Times.Once);
         } 
     }
 }

@@ -6,19 +6,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Freddy.Application.Core.Commands;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Products
 {
     public class UpdateProductTests
     {
-        private readonly Mock<IProducts> _MockProducts;
+        private readonly Mock<IProducts> _productsMock;
         private readonly UpdateProduct _updateProduct;
 
         public UpdateProductTests()
         {
-            _MockProducts = new Mock<IProducts>();
-            _updateProduct = new UpdateProduct(_MockProducts.Object);
+            _productsMock = new Mock<IProducts>();
+            _updateProduct = new UpdateProduct(_productsMock.Object);
         }
 
         [Fact]
@@ -27,11 +28,11 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
             var productId = new Guid("e8e060d6-5cfc-4009-b150-c0870cc45464");
             var productInfo = new ProductInfo("change-code", "change-name", "change-size");
 
-            _MockProducts.Setup(s => s.Get(productId)).ReturnsAsync(new Product(productId, new ProductInfo()));
+            _productsMock.Setup(s => s.Get(productId)).ReturnsAsync(new Product(productId, new ProductInfo()));
 
             await _updateProduct.Handle(new UpdateProductCommand(productId, productInfo));
 
-            _MockProducts.Verify(products => products.Update(It.Is(Helpers.EqualTo(productId, productInfo))), Times.Once);
+            _productsMock.Verify(products => products.Update(It.Is(A.Product.With(productId, productInfo))), Times.Once);
         }
 
         [Fact]
@@ -40,10 +41,21 @@ namespace Freddy.Application.UnitTests.Application.Commands.Products
             var productId = new Guid("e8e060d6-5cfc-4009-b150-c0870cc45464");
             var productInfo = new ProductInfo("change-code", "change-name", "change-size");
 
-            _MockProducts.Setup(s => s.Get(productId)).ReturnsAsync(new Product(productId, new ProductInfo()));
+            _productsMock.Setup(s => s.Get(productId)).ReturnsAsync(new Product(productId, new ProductInfo()));
 
             await _updateProduct.Handle(new UpdateProductCommand(productId, productInfo));
-            _MockProducts.Verify(products => products.Get(productId), Times.Once);
+            _productsMock.Verify(products => products.Get(productId), Times.Once);
+        }
+        
+        [Fact]
+        public async Task Execute_ShouldThrowExceptionOnNotExistingProduct()
+        {
+            var productId = new Guid("e8e060d6-5cfc-4009-b150-c0870cc45464");
+            var productInfo = new ProductInfo("change-code", "change-name", "change-size");
+
+            _productsMock.Setup(s => s.Get(productId)).ReturnsAsync((Product) null);
+
+            await Assert.ThrowsAsync<NotFoundException>(() => _updateProduct.Handle(new UpdateProductCommand(productId, productInfo)));
         }
     }
 }

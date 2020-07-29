@@ -1,12 +1,10 @@
-﻿using Freddy.Application.Commands.Customers;
+﻿using System;
+using System.Threading.Tasks;
+using Freddy.Application.Commands.Customers;
 using Freddy.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Freddy.Persistance
+namespace Freddy.Persistance.Customers
 {
     public class CustomerCommandRepository : ICustomers
     {

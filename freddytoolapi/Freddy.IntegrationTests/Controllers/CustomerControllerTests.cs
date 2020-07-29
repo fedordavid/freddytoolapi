@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Freddy.Application.Queries.Customers;
 using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
+using Freddy.Persistance.Customers;
 using Freddy.Persistance.DbContexts;
-using Freddy.Persistance.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -53,7 +53,7 @@ namespace Freddy.IntegrationTests.Controllers
 
             await using (var ctx = CreateDatabaseContext())
             {
-                await ctx.Customers.AddAsync(new Customer { Id = customerId });
+                await ctx.Customers.AddAsync(new CustomerEntity { Id = customerId });
                 await ctx.SaveChangesAsync();
             }
 
@@ -71,7 +71,7 @@ namespace Freddy.IntegrationTests.Controllers
 
                 await using (var ctx = CreateDatabaseContext())
                 {
-                    await ctx.Customers.AddAsync(new Customer { Id = customerId });
+                    await ctx.Customers.AddAsync(new CustomerEntity { Id = customerId });
                     await ctx.SaveChangesAsync();
                 }
 

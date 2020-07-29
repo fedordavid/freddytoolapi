@@ -1,5 +1,4 @@
 ﻿using Freddy.Application.Commands.Customers;
-using Freddy.Persistance.Entities;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -26,7 +25,7 @@ namespace Freddy.Application.UnitTests.Application.Commands.Customers
 
             _deleteCustomer.Handle(new DeleteCustomerCommand(customerId));
 
-            _customersMock.Verify(cmd => cmd.Delete(customerId), Times.Once);
+            _customersMock.Verify(customers => customers.Delete(customerId), Times.Once);
         }
     }
 }

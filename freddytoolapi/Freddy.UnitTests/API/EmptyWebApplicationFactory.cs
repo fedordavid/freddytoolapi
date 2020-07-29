@@ -1,4 +1,5 @@
-﻿using Freddy.Application.Core.Commands;
+﻿using Freddy.API.Controllers;
+using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Moq;
 using HostBuilder = Microsoft.Extensions.Hosting.Host;
 
 namespace Freddy.Application.UnitTests.API

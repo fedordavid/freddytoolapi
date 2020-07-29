@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Freddy.Persistance.Customers;
 using Freddy.Persistance.DbContexts;
-using Freddy.Persistance.Entities;
 
 namespace Freddy.IntegrationTests.TestData
 {
@@ -16,9 +16,9 @@ namespace Freddy.IntegrationTests.TestData
             context.SaveChanges();
         }
 
-        public IEnumerable<Customer> SeedData()
+        public IEnumerable<CustomerEntity> SeedData()
         {
-            yield return new Customer()
+            yield return new CustomerEntity()
             {
                 Id = new Guid("8E704345-26BC-4091-A9CC-0CA052C03556"),
                 Name = "Ilosfai-Pataki Júlia",
@@ -26,7 +26,7 @@ namespace Freddy.IntegrationTests.TestData
                 Phone = "+36 900 800 4445"
             };
 
-            yield return new Customer()
+            yield return new CustomerEntity()
             {
                 Id = new Guid("2F4172F9-8537-4059-8567-31D5E36029A9"),
                 Name = "Bujdosó Réka",

@@ -33,6 +33,7 @@ namespace Freddy.Host
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(cfg => cfg.AllowAnyOrigin());
             }
 
             app.UseRouting();

@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+const createView =
+  (name, path = '', componentName = null) => ({ path: `/${path}`, name, component: () => import(`../views/${componentName}.vue`)})
 
-  const routes = [
+const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
+    component: () => import('../layouts/BaseLayout.vue'),
+    children: [
+      createView("Home", "", "Home"),
+      createView("Products", "Products", "Products/ProductsList")
+    ]
+  }
 ]
+
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes

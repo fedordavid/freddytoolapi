@@ -101,10 +101,12 @@ namespace Freddy.Application.UnitTests.API.Controllers
             {
                 var url = $"api/freddy/products";
 
-                var products = new[]
+                var productView = new ProductViewBuilder();
+
+                var products = new ProductView[]
                 {
-                    new ProductView {Id = new Guid("5412D947-05DB-45AE-AA20-6ADA289FBA0E")},
-                    new ProductView {Id = new Guid("A017EFE7-D230-42BD-84F8-65574DD5AF6E")}
+                    productView.WithId("5412D947-05DB-45AE-AA20-6ADA289FBA0E"),
+                    productView.WithId("A017EFE7-D230-42BD-84F8-65574DD5AF6E")
                 };
 
                 _queryBusMock

@@ -33,14 +33,12 @@ namespace Freddy.Application.UnitTests.API
             Mock<ICommandBus> commandBusMock = null, 
             Mock<IGuidProvider> guidProviderMock = null)
         {
-            var factory = new CommonWebApplicationBuilder<TStartup>
+            return new CommonWebApplicationBuilder<TStartup>
             {
                 _queryBusMock = queryBusMock ?? _queryBusMock,
                 _commandBusMock = commandBusMock ?? _commandBusMock,
                 _guidProviderMock = guidProviderMock ?? _guidProviderMock
             };
-
-            return factory;
         }
         
         protected override IHostBuilder CreateHostBuilder()

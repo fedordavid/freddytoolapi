@@ -5,42 +5,39 @@ namespace Freddy.Application.UnitTests.API.Controllers.CustomerController
 {
     public class CustomerViewBuilder
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        private Guid _id = new Guid("AFB66C37-C61E-468F-8D76-9A1022593666");
+        private string _name = "Customer Name";
+        private string _email = "customer@name.com";
+        private string _phone = "+421900000000";
 
         public CustomerViewBuilder(CustomerViewBuilder customer)
         {
-            this.Id = customer.Id;
-            this.Name = customer.Name;
-            this.Email = customer.Email;
-            this.Phone = customer.Phone;
+            _id = customer._id;
+            this._name = customer._name;
+            this._email = customer._email;
+            this._phone = customer._phone;
         }
 
         public CustomerViewBuilder()
         {
-
         }
 
         public CustomerViewBuilder WithId(string id)
         {
-            var result = new CustomerViewBuilder(this)
+            return  new CustomerViewBuilder(this)
             {
-                Id = new Guid(id)
+                _id = new Guid(id)
             };
-
-            return result;
         }
 
         public CustomerView Build()
         {
             return new CustomerView()
             {
-                Id = Id,
-                Name = Name,
-                Email = Email,
-                Phone = Phone
+                Id = _id,
+                Name = _name,
+                Email = _email,
+                Phone = _phone
             };
         }
 

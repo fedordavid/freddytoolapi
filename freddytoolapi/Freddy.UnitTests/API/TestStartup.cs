@@ -12,7 +12,9 @@ namespace Freddy.Application.UnitTests.API
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApi().AddApplicationPart(typeof(OrderController).Assembly);
+            services
+                .AddApi()
+                .AddApplicationPart(typeof(ProductController).Assembly);
         }
 
         [UsedImplicitly]

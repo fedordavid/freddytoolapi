@@ -3,8 +3,6 @@ using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Freddy.Application.Core.Commands;
 using Xunit;

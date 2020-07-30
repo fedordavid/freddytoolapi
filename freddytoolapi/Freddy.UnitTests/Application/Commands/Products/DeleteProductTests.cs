@@ -1,8 +1,6 @@
 ﻿using Freddy.Application.Commands.Products;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Products

@@ -5,21 +5,19 @@ using Freddy.Application.Commands.Products;
 using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Customers;
-using Freddy.Application.Queries.Customers.GetAllCustomers;
 using Freddy.Application.Queries.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Freddy.API.Controllers
 {
     [ApiController]
-    public class OrderController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IQueryBus _queryBus;
         private readonly ICommandBus _commandBus;
         private readonly IGuidProvider _guidProvider;
 
-        public OrderController(IQueryBus queryBus, ICommandBus commandBus, IGuidProvider guidProvider)
+        public ProductController(IQueryBus queryBus, ICommandBus commandBus, IGuidProvider guidProvider)
         {
             _queryBus = queryBus;
             _commandBus = commandBus;

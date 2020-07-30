@@ -1,8 +1,6 @@
 ﻿using Freddy.Application.Commands.Customers;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Customers

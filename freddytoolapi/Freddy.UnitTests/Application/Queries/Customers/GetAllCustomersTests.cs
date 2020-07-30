@@ -3,8 +3,6 @@ using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Customers.GetAllCustomers;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

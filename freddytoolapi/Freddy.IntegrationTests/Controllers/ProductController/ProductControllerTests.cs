@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
@@ -15,12 +14,12 @@ using Freddy.Persistance.Products;
 namespace Freddy.IntegrationTests.Controllers
 {
     [Collection("Integration")]
-    public class OrderControllerTests : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class ProductControllerTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
         private readonly IServiceProvider _services;
 
-        public OrderControllerTests(CustomWebApplicationFactory<Startup> factory)
+        public ProductControllerTests(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
             _services = factory.Services;

@@ -8,17 +8,17 @@ using Freddy.Application.Core.Queries;
 using Moq;
 using Xunit;
 
-namespace Freddy.Application.UnitTests.API.Controllers
+namespace Freddy.Application.UnitTests.API.Controllers.ProductController
 {
     public static partial class CustomerControllerTests
     {
-        public class DeleteCustomer : IClassFixture<EmptyWebApplicationFactory<TestStartup>>
+        public class DeleteCustomer : IClassFixture<CustomerControllerTests<TestStartup>>
         {
             private readonly HttpClient _client;
             private readonly Mock<IQueryBus> _queryBusMock;
             private readonly Mock<ICommandBus> _commandBusMock;
 
-            public DeleteCustomer(EmptyWebApplicationFactory<TestStartup> factory)
+            public DeleteCustomer(CustomerControllerTests<TestStartup> factory)
             {
                 _queryBusMock = new Mock<IQueryBus>();
                 _commandBusMock = new Mock<ICommandBus>();

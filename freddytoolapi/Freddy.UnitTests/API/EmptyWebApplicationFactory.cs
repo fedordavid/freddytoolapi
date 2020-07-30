@@ -13,7 +13,7 @@ using HostBuilder = Microsoft.Extensions.Hosting.Host;
 namespace Freddy.Application.UnitTests.API
 {
     [UsedImplicitly]
-    public class EmptyWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
+    public class CustomerControllerTests<TStartup> : WebApplicationFactory<TStartup>
         where TStartup : class
     {
         protected override IHostBuilder CreateHostBuilder()

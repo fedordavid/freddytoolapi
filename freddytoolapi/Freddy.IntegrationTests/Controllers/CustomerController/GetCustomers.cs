@@ -7,7 +7,7 @@ using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
 using Xunit;
 
-namespace Freddy.IntegrationTests.Controllers
+namespace Freddy.IntegrationTests.Controllers.CustomerController
 {
     public static partial class CustomerControllerTests
     {

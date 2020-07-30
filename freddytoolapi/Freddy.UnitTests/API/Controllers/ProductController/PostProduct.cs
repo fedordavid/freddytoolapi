@@ -9,7 +9,7 @@ using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using Xunit;
 
-namespace Freddy.Application.UnitTests.API.Controllers
+namespace Freddy.Application.UnitTests.API.Controllers.ProductController
 {
     public static partial class ProductControllerTests
     {

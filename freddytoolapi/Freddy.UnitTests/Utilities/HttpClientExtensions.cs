@@ -12,13 +12,21 @@ namespace Freddy.Application.UnitTests.Utilities
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        
-        public static async Task<TObject> GetObjectAsync<TObject>(this HttpClient client, string url)
+
+        public static async Task<TObject> GetObjectAsync<TObject>(this HttpClient client, string url) where TObject : class
         {
             var response = await client.GetStreamAsync(url);
-            return await JsonSerializer.DeserializeAsync<TObject>(response, Options);
+
+            try
+            {
+                return await JsonSerializer.DeserializeAsync<TObject>(response, Options);
+            }
+            catch
+            {
+                return null;
+            }
         }
-        
+
         public static async Task<HttpResponseMessage> PostObjectAsync<TObject>(this HttpClient client, string url, TObject o)
         {
             var payload = JsonSerializer.Serialize(o, Options);

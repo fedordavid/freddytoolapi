@@ -5,6 +5,7 @@ using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Customers.GetAllCustomers;
+using Freddy.Application.Queries.Customers.GetCustomerById;
 using Freddy.Application.Queries.Products;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +28,7 @@ namespace Freddy.Application
             services.AddScoped<IExecuteQuery<GetAllProductsQuery, ProductView[]>, GetAllProducts>();
             services.AddScoped<IExecuteQuery<GetProductByIdQuery, ProductView>, GetProductById>();
             services.AddScoped<IExecuteQuery<GetAllCustomersQuery, CustomerView[]>, GetAllCustomers>();
+            services.AddScoped<IExecuteQuery<GetCustomerByIdQuery, CustomerView>, GetCustomerById>();
         }
     }
 }

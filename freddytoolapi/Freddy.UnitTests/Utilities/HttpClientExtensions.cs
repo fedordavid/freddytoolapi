@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -8,17 +9,23 @@ namespace Freddy.Application.UnitTests.Utilities
 {
     public static class HttpClientExtensions
     {
+        public static TObject Deserialize<TObject>(this string str)
+        {
+            return str.Any() ? JsonSerializer.Deserialize<TObject>(str, Options) : default;
+        }
+
         private static readonly JsonSerializerOptions Options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        
+
         public static async Task<TObject> GetObjectAsync<TObject>(this HttpClient client, string url)
         {
-            var response = await client.GetStreamAsync(url);
-            return await JsonSerializer.DeserializeAsync<TObject>(response, Options);
+            var response = await client.GetStringAsync(url);
+
+            return response.Deserialize<TObject>();
         }
-        
+
         public static async Task<HttpResponseMessage> PostObjectAsync<TObject>(this HttpClient client, string url, TObject o)
         {
             var payload = JsonSerializer.Serialize(o, Options);

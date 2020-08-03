@@ -5,6 +5,7 @@ using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Customers.GetAllCustomers;
+using Freddy.Application.Queries.Customers.GetCustomerById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Freddy.API.Controllers
@@ -25,6 +26,12 @@ namespace Freddy.API.Controllers
         public async Task<ActionResult<CustomerView[]>> GetAllCustomers()
         {
             return await _queryBus.Execute(new GetAllCustomersQuery());
+        }
+
+        [HttpGet("api/freddy/customers/{customerId}")]
+        public async Task<CustomerView> GetCustomerById(Guid customerId)
+        {
+            return await _queryBus.Execute(new GetCustomerByIdQuery(customerId));
         }
 
         [HttpDelete("api/freddy/customers/{customerId}")]

@@ -33,9 +33,7 @@ namespace Freddy.IntegrationTests.Controllers
                 await using (var ctx = _services.CreateDbContext())
                 {
                     var product = await ctx.Products.FindAsync(productId);
-                    Assert.Equal(updateProductInfo.Code, product.Code);
-                    Assert.Equal(updateProductInfo.Name, product.Name);
-                    Assert.Equal(updateProductInfo.Size, product.Size);
+                    Compare.ProductEntityToInfo(product, updateProductInfo);
                 }
             }
         }

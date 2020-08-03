@@ -31,6 +31,7 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
+    codeCoverageEnabled: true
     testAssemblyVer2: |
       **\*tests*.dll
       !**\*TestAdapter.dll

@@ -17,9 +17,7 @@ namespace Freddy.IntegrationTests.Utilities
         {
             var response = await client.GetStringAsync(url);
 
-            if (response.Length == 0) return default;
-
-            return JsonSerializer.Deserialize<TObject>(response, Options);
+            return response.Any() ? JsonSerializer.Deserialize<TObject>(response, Options) : default;
         }
         
         public static async Task<HttpResponseMessage> PostObjectAsync<TObject>(this HttpClient client, string url, TObject o)

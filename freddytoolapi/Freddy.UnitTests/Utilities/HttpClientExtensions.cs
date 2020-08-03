@@ -13,7 +13,7 @@ namespace Freddy.Application.UnitTests.Utilities
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
-        public static async Task<TObject> GetObjectAsync<TObject>(this HttpClient client, string url) where TObject : class
+        public static async Task<TObject> GetObjectAsync<TObject>(this HttpClient client, string url)
         {
             var response = await client.GetStreamAsync(url);
 
@@ -23,7 +23,7 @@ namespace Freddy.Application.UnitTests.Utilities
             }
             catch
             {
-                return null;
+                return default;
             }
         }
 

@@ -47,11 +47,8 @@ namespace Freddy.IntegrationTests.Controllers.CustomerController
                     foreach (var customer in result)
                     {
                         var findCustomer = await ctx.Customers.FindAsync(customer.Id);
-                        Assert.NotNull(customer);
-                        Assert.Equal(customer.Id, findCustomer.Id);
-                        Assert.Equal(customer.Email, findCustomer.Email);
-                        Assert.Equal(customer.Name, findCustomer.Name);
-                        Assert.Equal(customer.Phone, findCustomer.Phone);
+                        Assert.NotNull(findCustomer);
+                        Compare.CustomerEntityToView(findCustomer, customer);
                     }
                 }
             }
@@ -79,12 +76,9 @@ namespace Freddy.IntegrationTests.Controllers.CustomerController
 
                 await using (var ctx = _services.CreateDbContext())
                 {
-                   var findCustomer = await ctx.Customers.FindAsync(customerId);
-                   Assert.NotNull(result);
-                   Assert.Equal(result.Id, findCustomer.Id);
-                   Assert.Equal(result.Email, findCustomer.Email);
-                   Assert.Equal(result.Name, findCustomer.Name);
-                   Assert.Equal(result.Phone, findCustomer.Phone);
+                    var findCustomer = await ctx.Customers.FindAsync(customerId);
+                    Assert.NotNull(result);
+                    Compare.CustomerEntityToView(findCustomer, result);
                 }
             }
 

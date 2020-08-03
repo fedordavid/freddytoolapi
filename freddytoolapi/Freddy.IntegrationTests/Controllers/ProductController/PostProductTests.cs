@@ -38,9 +38,7 @@ namespace Freddy.IntegrationTests.Controllers
 
                 var product = await ctx.Products.FindAsync(productId);
                 Assert.NotNull(product);
-                Assert.Equal(product.Code, info.Code);
-                Assert.Equal(product.Name, info.Name);
-                Assert.Equal(product.Size, info.Size);
+                Compare.ProductEntityToInfo(product, info);
             }
         }
     }

@@ -12,12 +12,12 @@ namespace Freddy.IntegrationTests.Controllers.CustomerController
     public static partial class CustomerControllerTests
     {
         [Collection("Integration")]
-        public class GetCustomers : IClassFixture<CustomWebApplicationFactory<Startup>>
+        public class GetCustomersTests : IClassFixture<CustomWebApplicationFactory<Startup>>
         {
             private readonly HttpClient _client;
             private readonly IServiceProvider _services;
 
-            public GetCustomers(CustomWebApplicationFactory<Startup> factory)
+            public GetCustomersTests(CustomWebApplicationFactory<Startup> factory)
             {
                 _client = factory.CreateClient();
                 _services = factory.Services;

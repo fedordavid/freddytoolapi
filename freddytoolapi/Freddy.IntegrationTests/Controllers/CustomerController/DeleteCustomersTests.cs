@@ -13,12 +13,12 @@ namespace Freddy.IntegrationTests.Controllers.CustomerController
     {
         [Collection("Integration")]
 
-        public class DeleteCustomers : IClassFixture<CustomWebApplicationFactory<Startup>>
+        public class DeleteCustomersTests : IClassFixture<CustomWebApplicationFactory<Startup>>
         {
             private readonly HttpClient _client;
             private readonly IServiceProvider _services;
 
-            public DeleteCustomers(CustomWebApplicationFactory<Startup> factory)
+            public DeleteCustomersTests(CustomWebApplicationFactory<Startup> factory)
             {
                 _client = factory.CreateClient();
                 _services = factory.Services;

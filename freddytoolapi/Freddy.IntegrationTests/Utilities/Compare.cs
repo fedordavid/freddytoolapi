@@ -1,8 +1,10 @@
-﻿using Freddy.Application.Commands.Products;
+﻿using Freddy.Application.Commands.Customers;
+using Freddy.Application.Commands.Products;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Products;
 using Freddy.Persistance.Customers;
 using Freddy.Persistance.Products;
+using System;
 using Xunit;
 
 namespace Freddy.IntegrationTests.Utilities
@@ -30,6 +32,13 @@ namespace Freddy.IntegrationTests.Utilities
             Assert.Equal(entity.Name, view.Name);
             Assert.Equal(entity.Size, view.Size);
             Assert.Equal(entity.Code, view.Code);
+        }
+
+        internal static void CustomerEntityToInfo(CustomerEntity customer, CustomerInfo info)
+        {
+            Assert.Equal(customer.Name, info.Name);
+            Assert.Equal(customer.Email, info.Email);
+            Assert.Equal(customer.Phone, info.Phone);
         }
     }
 }

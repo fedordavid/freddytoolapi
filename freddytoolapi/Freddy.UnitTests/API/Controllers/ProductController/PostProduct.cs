@@ -34,6 +34,7 @@ namespace Freddy.Application.UnitTests.API.Controllers.ProductController
             {
                 var url = $"api/freddy/products";
                 var productId = new Guid("5412D947-05DB-45AE-AA20-6ADA289FBA0E");
+                
                 _guidProvider.Setup(p => p.NewGuid()).Returns(productId);
 
                 var response = await _client.PostObjectAsync(url, new { });

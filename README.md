@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/covid19-david/freddytoolapi/_apis/build/status/fedordavid.freddytoolapi?branchName=master)](https://dev.azure.com/covid19-david/freddytoolapi/_build/latest?definitionId=10&branchName=master)
+
 # freddytoolapi
 
 This tool is going to support sales department in case of individual cases of customers needs and will handle the state of the requested items

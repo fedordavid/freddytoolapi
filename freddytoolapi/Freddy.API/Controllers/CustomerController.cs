@@ -54,9 +54,9 @@ namespace Freddy.API.Controllers
         }
 
         [HttpPut("api/freddy/customers/{customerId}")]
-        public async Task<ActionResult> PutCustomer(Guid CustomerId, CustomerInfo customerInfo)
+        public async Task<ActionResult> PutCustomer(Guid customerId, CustomerInfo customerInfo)
         {
-            await _commandBus.Handle(new UpdateCustomerCommand(CustomerId, customerInfo));
+            await _commandBus.Handle(new UpdateCustomerCommand(customerId, customerInfo));
             return Ok();
         }
     }

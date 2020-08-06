@@ -37,5 +37,28 @@ namespace Freddy.Persistance.Customers
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Customer> Get(Guid customerId)
+        {
+            var customerEntity = await _context.Customers.FindAsync(customerId);
+
+            if (customerEntity is null)
+                return null;
+
+            var customerInfo = new CustomerInfo(customerEntity.Name, customerEntity.Email, customerEntity.Phone);
+            return new Customer(customerEntity.Id, customerInfo);
+        }
+
+        public async Task Update(Customer customer)
+        {
+            var info = customer.Info;
+            var customerEntity = await _context.Customers.FindAsync(customer.Id);
+
+            customerEntity.Name = info.Name;
+            customerEntity.Phone = info.Phone;
+            customerEntity.Email = info.Email;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

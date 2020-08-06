@@ -28,8 +28,6 @@ namespace Freddy.Application.UnitTests.API.Controllers.ProductController
                     .CreateClient();
             }
 
-            //TODO: Tests for GetCustomers
-
             [Fact]
             public async Task DeleteCustomer_ShouldReturn200()
             {

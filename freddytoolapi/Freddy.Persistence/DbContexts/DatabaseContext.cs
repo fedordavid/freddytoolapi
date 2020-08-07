@@ -1,9 +1,9 @@
 ﻿using System;
-using Freddy.Persistance.Customers;
-using Freddy.Persistance.Products;
+using Freddy.Persistence.Customers;
+using Freddy.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 
-namespace Freddy.Persistance.DbContexts
+namespace Freddy.Persistence.DbContexts
 {
     public class DatabaseContext : DbContext
     {

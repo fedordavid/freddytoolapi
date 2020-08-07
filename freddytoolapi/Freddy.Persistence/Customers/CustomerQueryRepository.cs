@@ -3,10 +3,10 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Freddy.Application.Queries;
 using Freddy.Application.Queries.Customers;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Freddy.Persistance.Customers
+namespace Freddy.Persistence.Customers
 {
     public class CustomerQueryRepository : ICustomerViews
     {

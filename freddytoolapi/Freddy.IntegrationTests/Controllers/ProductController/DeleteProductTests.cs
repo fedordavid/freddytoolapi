@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Host;
 using Xunit;
-using Freddy.Persistance.Products;
+using Freddy.Persistence.Products;
 using Freddy.IntegrationTests.Utilities;
 
 namespace Freddy.IntegrationTests.Controllers

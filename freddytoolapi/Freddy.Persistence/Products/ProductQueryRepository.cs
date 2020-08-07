@@ -2,10 +2,10 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Freddy.Application.Queries.Products;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Freddy.Persistance.Products
+namespace Freddy.Persistence.Products
 {
     public class ProductQueryRepository : IProductViews
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Freddy.Persistance.Migrations
+namespace Freddy.Persistence.Migrations
 {
     public partial class AddCustomerEntity : Migration
     {

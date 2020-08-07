@@ -3,15 +3,15 @@ using Freddy.Application.Commands.Customers;
 using Freddy.Application.Commands.Products;
 using Freddy.Application.Queries;
 using Freddy.Application.Queries.Products;
-using Freddy.Persistance.Customers;
-using Freddy.Persistance.DbContexts;
-using Freddy.Persistance.Products;
+using Freddy.Persistence.Customers;
+using Freddy.Persistence.DbContexts;
+using Freddy.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
-namespace Freddy.Persistance
+namespace Freddy.Persistence
 {
     public static class ServiceCollectionExtensions
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Freddy.Persistance
+namespace Freddy.Persistence
 {
     public static class PersistenceInitializer
     {

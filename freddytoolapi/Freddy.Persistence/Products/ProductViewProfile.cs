@@ -2,7 +2,7 @@
 using Freddy.Application.Queries.Products;
 using JetBrains.Annotations;
 
-namespace Freddy.Persistance.Products
+namespace Freddy.Persistence.Products
 {
     [UsedImplicitly]
     public class ProductViewProfile : Profile

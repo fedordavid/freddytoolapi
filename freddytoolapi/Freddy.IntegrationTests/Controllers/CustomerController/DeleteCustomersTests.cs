@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
-using Freddy.Persistance.Customers;
+using Freddy.Persistence.Customers;
 using Xunit;
 
 namespace Freddy.IntegrationTests.Controllers.CustomerController

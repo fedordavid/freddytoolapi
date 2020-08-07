@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.Host", "Freddy.Host\Freddy.Host.csproj", "{19906569-DCCE-45B3-8956-C4B75E94C047}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.Persistance", "Freddy.Persistance\Freddy.Persistance.csproj", "{3C1F46E8-EC8A-478F-923D-BA02455854EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.Persistence", "Freddy.Persistence\Freddy.Persistence.csproj", "{3C1F46E8-EC8A-478F-923D-BA02455854EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Freddy.Application", "Freddy.Application\Freddy.Application.csproj", "{3486951F-D307-45E2-8B26-DED4F28A10FF}"
 EndProject

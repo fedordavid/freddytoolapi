@@ -1,4 +1,4 @@
-﻿using Freddy.Persistance.DbContexts;
+﻿using Freddy.Persistence.DbContexts;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

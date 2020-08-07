@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Freddy.Application.Queries.Customers;
 
-namespace Freddy.Persistance.Customers
+namespace Freddy.Persistence.Customers
 {
     public class CustomerViewProfile : Profile
     {

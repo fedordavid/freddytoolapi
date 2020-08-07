@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Freddy.Application.Commands.Products;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.DbContexts;
 
-namespace Freddy.Persistance.Products
+namespace Freddy.Persistence.Products
 {
     public class ProductCommandRepository : IProducts
     {

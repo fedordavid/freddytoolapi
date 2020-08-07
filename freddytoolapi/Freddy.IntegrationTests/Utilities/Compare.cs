@@ -4,7 +4,6 @@ using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Products;
 using Freddy.Persistence.Customers;
 using Freddy.Persistence.Products;
-using System;
 using Xunit;
 
 namespace Freddy.IntegrationTests.Utilities

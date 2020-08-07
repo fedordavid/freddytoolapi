@@ -1,5 +1,4 @@
-﻿using Freddy.API.Core;
-using Freddy.Application.Core.Queries;
+﻿using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Customers.GetCustomerById;
 using Freddy.Application.UnitTests.Utilities;

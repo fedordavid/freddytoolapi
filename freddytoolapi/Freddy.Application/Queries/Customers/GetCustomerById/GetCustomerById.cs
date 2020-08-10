@@ -1,8 +1,5 @@
 ﻿using Freddy.Application.Core.Queries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Freddy.Application.Queries.Customers.GetCustomerById

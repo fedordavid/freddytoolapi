@@ -1,4 +1,4 @@
-using Freddy.Persistance;
+using Freddy.Persistence;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;

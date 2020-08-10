@@ -28,8 +28,6 @@ namespace Freddy.Application.UnitTests.API.Controllers.ProductController
                     .CreateClient();
             }
 
-            //TODO: Tests for GetCustomers
-
             [Fact]
             public async Task DeleteCustomer_ShouldReturn200()
             {
@@ -47,7 +45,7 @@ namespace Freddy.Application.UnitTests.API.Controllers.ProductController
                 var customerId = Guid.NewGuid();
                 var url = $"api/freddy/customers/{customerId}";
 
-                var response = await _client.DeleteAsync(url);
+                await _client.DeleteAsync(url);
 
                 _commandBusMock.Verify(c => c.Handle(It.Is<DeleteCustomerCommand>(cmd => cmd.CustomerId == customerId)), Times.Once);
             }

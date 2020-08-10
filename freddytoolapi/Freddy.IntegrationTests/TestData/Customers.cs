@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Freddy.Persistance.Customers;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.Customers;
+using Freddy.Persistence.DbContexts;
 
 namespace Freddy.IntegrationTests.TestData
 {

@@ -7,5 +7,7 @@ namespace Freddy.Application.Commands.Customers
     {
         Task Add(Customer customer);
         Task Delete(Guid customerId);
+        Task Update(Customer customer);
+        Task<Customer> Get(Guid customerId);
     }
 }

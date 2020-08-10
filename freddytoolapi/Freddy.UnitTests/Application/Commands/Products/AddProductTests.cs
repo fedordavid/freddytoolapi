@@ -1,5 +1,4 @@
 using System;
-using System.Linq.Expressions;
 using Freddy.Application.Commands.Products;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;

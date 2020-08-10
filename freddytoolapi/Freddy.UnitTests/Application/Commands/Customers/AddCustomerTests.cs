@@ -3,9 +3,6 @@ using Freddy.Application.Commands.Customers.AddCustomer;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Customers

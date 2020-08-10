@@ -14,5 +14,10 @@ namespace Freddy.Application.Commands.Customers
         }
 
         public Customer() { }
+
+        public Customer With(CustomerInfo info)
+        {
+            return new Customer(Id, info);
+        }
     }
 }

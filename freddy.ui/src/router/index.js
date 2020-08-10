@@ -10,7 +10,8 @@ const routes = [
     component: () => import('../layouts/BaseLayout.vue'),
     children: [
       createView("Home", "", "Home"),
-      createView("Products", "Products", "Products/ProductsList")
+      createView("Products", "Products", "Products/ProductsList"),
+      createView("Customers", "Customers", "Customers/CustomersList")
     ]
   }
 ]

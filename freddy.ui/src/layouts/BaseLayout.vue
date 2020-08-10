@@ -7,6 +7,7 @@
       <v-list dense >
         <navigation-drawer-item to="Home" title="Home" icon="mdi-home" />
         <navigation-drawer-item to="Products" title="Products" icon="mdi-tshirt-crew" />
+        <navigation-drawer-item to="Customers" title="Customers" icon="mdi-human-male-female" />
       </v-list>
     </v-navigation-drawer>
     <v-main app>

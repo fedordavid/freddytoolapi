@@ -1,5 +1,5 @@
 ﻿using Freddy.IntegrationTests.TestData;
-using Freddy.Persistance.DbContexts;
+using Freddy.Persistence.DbContexts;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

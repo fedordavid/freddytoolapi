@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Freddy.API.Core;
 using Freddy.Application.Commands.Customers;
 using Freddy.Application.Commands.Customers.AddCustomer;
+using Freddy.Application.Commands.Customers.UpdateCustomer;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
 using Freddy.Application.Queries.Customers;
@@ -50,6 +51,13 @@ namespace Freddy.API.Controllers
             var customerId = _guidProvider.NewGuid();
             await _commandBus.Handle(new AddCustomerCommand(customerId, info));
             return CreatedAtAction(nameof(GetCustomerById), new { customerId }, null);
+        }
+
+        [HttpPut("api/freddy/customers/{customerId}")]
+        public async Task<ActionResult> PutCustomer(Guid customerId, CustomerInfo customerInfo)
+        {
+            await _commandBus.Handle(new UpdateCustomerCommand(customerId, customerInfo));
+            return Ok();
         }
     }
 }

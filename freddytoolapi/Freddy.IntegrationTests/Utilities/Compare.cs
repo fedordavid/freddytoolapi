@@ -2,9 +2,8 @@
 using Freddy.Application.Commands.Products;
 using Freddy.Application.Queries.Customers;
 using Freddy.Application.Queries.Products;
-using Freddy.Persistance.Customers;
-using Freddy.Persistance.Products;
-using System;
+using Freddy.Persistence.Customers;
+using Freddy.Persistence.Products;
 using Xunit;
 
 namespace Freddy.IntegrationTests.Utilities

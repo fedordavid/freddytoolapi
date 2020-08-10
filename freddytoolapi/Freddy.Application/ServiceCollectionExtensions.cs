@@ -1,5 +1,6 @@
 ﻿using Freddy.Application.Commands.Customers;
 using Freddy.Application.Commands.Customers.AddCustomer;
+using Freddy.Application.Commands.Customers.UpdateCustomer;
 using Freddy.Application.Commands.Products;
 using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
@@ -22,8 +23,9 @@ namespace Freddy.Application
             services.AddScoped<IHandleCommands<UpdateProductCommand>, UpdateProduct>();
             services.AddScoped<IHandleCommands<DeleteCustomerCommand>, DeleteCustomer>();
             services.AddScoped<IHandleCommands<AddCustomerCommand>, AddCustomer>();
+            services.AddScoped<IHandleCommands<UpdateCustomerCommand>, UpdateCustomer>();
         }
-        
+
         public static void AddQueries(this IServiceCollection services)
         {
             services.AddScoped<IQueryBus, QueryBus>();

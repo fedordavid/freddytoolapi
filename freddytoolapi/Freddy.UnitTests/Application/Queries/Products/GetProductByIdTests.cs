@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
+using Freddy.Application.Products.Queries.GetProductById;
 using Moq;
 using Xunit;
 

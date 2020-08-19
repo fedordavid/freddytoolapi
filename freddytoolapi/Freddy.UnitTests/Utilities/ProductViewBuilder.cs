@@ -1,5 +1,5 @@
 ﻿using System;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
 
 namespace Freddy.Application.UnitTests.API.Controllers
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
 using JetBrains.Annotations;
 
 namespace Freddy.Persistence.Products

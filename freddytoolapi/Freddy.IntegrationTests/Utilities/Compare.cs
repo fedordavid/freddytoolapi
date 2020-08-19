@@ -1,7 +1,7 @@
-﻿using Freddy.Application.Commands.Customers;
-using Freddy.Application.Commands.Products;
-using Freddy.Application.Queries.Customers;
-using Freddy.Application.Queries.Products;
+﻿using Freddy.Application.Customers.Commands;
+using Freddy.Application.Customers.Queries;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Queries;
 using Freddy.Persistence.Customers;
 using Freddy.Persistence.Products;
 using Xunit;

@@ -1,8 +1,8 @@
-﻿using Freddy.Application.Commands.Customers;
-using Freddy.Application.Commands.Customers.AddCustomer;
-using Freddy.Application.UnitTests.Utilities;
+﻿using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using System;
+using Freddy.Application.Customers.Commands;
+using Freddy.Application.Customers.Commands.AddCustomer;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Customers

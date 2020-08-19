@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
 using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 

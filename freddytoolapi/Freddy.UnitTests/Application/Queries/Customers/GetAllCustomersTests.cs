@@ -1,9 +1,8 @@
-﻿using Freddy.Application.Queries;
-using Freddy.Application.Queries.Customers;
-using Freddy.Application.Queries.Customers.GetAllCustomers;
-using Moq;
+﻿using Moq;
 using System;
 using System.Threading.Tasks;
+using Freddy.Application.Customers.Queries;
+using Freddy.Application.Customers.Queries.GetAllCustomers;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Queries.Customers

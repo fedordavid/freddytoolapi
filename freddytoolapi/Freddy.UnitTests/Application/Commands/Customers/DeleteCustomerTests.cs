@@ -1,6 +1,7 @@
-﻿using Freddy.Application.Commands.Customers;
-using Moq;
+﻿using Moq;
 using System;
+using Freddy.Application.Customers.Commands;
+using Freddy.Application.Customers.Commands.DeleteCustomer;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Customers

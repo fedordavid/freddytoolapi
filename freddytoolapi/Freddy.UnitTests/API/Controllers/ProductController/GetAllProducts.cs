@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
+using Freddy.Application.Products.Queries.GetAllProducts;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using Xunit;

@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Freddy.Application.Queries;
-using Freddy.Application.Queries.Customers;
+using Freddy.Application.Customers.Queries;
 using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 

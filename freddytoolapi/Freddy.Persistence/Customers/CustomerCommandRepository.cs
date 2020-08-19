@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Freddy.Application.Commands.Customers;
+using Freddy.Application.Customers.Commands;
 using Freddy.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 

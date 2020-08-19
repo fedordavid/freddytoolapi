@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Queries;
 using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
 using Xunit;

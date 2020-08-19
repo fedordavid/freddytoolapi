@@ -1,8 +1,8 @@
 ﻿using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Customers.GetAllCustomers;
 using Moq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Freddy.Application.Customers.Queries.GetAllCustomers;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.API.Controllers.CustomerController

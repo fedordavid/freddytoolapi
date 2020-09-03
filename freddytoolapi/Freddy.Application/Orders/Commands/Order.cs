@@ -122,7 +122,11 @@ namespace Freddy.Application.Orders.Commands
 
     public abstract class OrderEvent : Event 
     {
-        public Guid OrderId { get; }
+        protected OrderEvent()
+        {
+        }
+
+        public Guid OrderId { get; set;}
         
         protected OrderEvent(Guid orderId)
         {
@@ -162,7 +166,11 @@ namespace Freddy.Application.Orders.Commands
     
     public class OrderCreated : OrderEvent
     {
-        public Guid CustomerId { get; }
+        public OrderCreated()
+        {
+        }
+
+        public Guid CustomerId { get; set; }
 
         public OrderCreated(Guid orderId, Guid customerId) : base(orderId)
         {
@@ -202,8 +210,12 @@ namespace Freddy.Application.Orders.Commands
     
     public class ProductQtySet : OrderEvent
     {
-        public Guid ProductId { get; }
-        public int Qty { get; }
+        public ProductQtySet()
+        {
+        }
+
+        public Guid ProductId { get; set;}
+        public int Qty { get; set; }
 
         public ProductQtySet(Guid orderId, Guid productId, int qty) : base(orderId)
         {
@@ -214,7 +226,11 @@ namespace Freddy.Application.Orders.Commands
     
     public class ProductRemoved : OrderEvent
     {
-        public Guid ProductId { get; }
+        public ProductRemoved()
+        {
+        }
+
+        public Guid ProductId { get; set;}
 
         public ProductRemoved(Guid orderId, Guid productId) : base(orderId)
         {

@@ -22,4 +22,8 @@
       <ProjectReference Include="..\Freddy.Host\Freddy.Host.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="API" />
+    </ItemGroup>
+
 </Project>

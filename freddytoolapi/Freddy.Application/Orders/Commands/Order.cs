@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Freddy.Application.Core.Events;
 
@@ -24,7 +25,7 @@ namespace Freddy.Application.Orders.Commands
             _customerId = customerId;
         }
         
-        public IEnumerable<Event> CreateOrder(Guid orderId)
+        public IEnumerable<OrderEvent> CreateOrder(Guid orderId)
         {
             if (orderId == Guid.Empty)
                 throw new Exception("Order Id is not valid.");
@@ -35,21 +36,23 @@ namespace Freddy.Application.Orders.Commands
     
     public class Order
     {
-        private readonly Guid _orderId;
-        private readonly Guid _customerId;
-        
+        public Guid OrderId { get; }
+        public Guid CustomerId { get; }
+
+        public ReadOnlyDictionary<Guid, OrderItem> OrderItems => new ReadOnlyDictionary<Guid, OrderItem>(_orderItems);
+
         private readonly Dictionary<Guid, OrderItem> _orderItems = new Dictionary<Guid, OrderItem>();
 
         public Order(Guid orderId, Guid customerId)
         {
-            _orderId = orderId;
-            _customerId = customerId;
+            OrderId = orderId;
+            CustomerId = customerId;
         }
         
         public Order(Order order)
         {
-            _orderId = order._orderId;
-            _customerId = order._customerId;
+            OrderId = order.OrderId;
+            CustomerId = order.CustomerId;
             _orderItems = new Dictionary<Guid, OrderItem>(order._orderItems);
         }
         
@@ -63,7 +66,7 @@ namespace Freddy.Application.Orders.Commands
             if (qty <= 0)
                 throw new Exception($"Product qty can't be `{qty}`. ProductId: {productId}");
             
-            yield return new ProductQtySet(_orderId, productId, qty);
+            yield return new ProductQtySet(OrderId, productId, qty);
         }
         
         public IEnumerable<Event> RemoveProduct(Guid productId)
@@ -71,7 +74,7 @@ namespace Freddy.Application.Orders.Commands
             if (!_orderItems.ContainsKey(productId))
                 throw new Exception($"Product `{productId}` can't be removed.");
             
-            yield return new ProductRemoved(_orderId, productId);
+            yield return new ProductRemoved(OrderId, productId);
         }
         
         public Order Apply(ProductQtySet productQtySet)
@@ -97,7 +100,7 @@ namespace Freddy.Application.Orders.Commands
         {
             return events.Aggregate(null as Order, (order, @event) => @event switch
             {
-                OrderCreated e => new Order(e.CustomerId, e.OrderId),
+                OrderCreated e => new Order(e.OrderId, e.CustomerId),
                 OrderEvent e => order.Apply(e as dynamic),
                 _ => throw new Exception($"Event `{@event.GetType().Name}` is not supported")
             });

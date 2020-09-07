@@ -9,6 +9,6 @@ namespace Freddy.Application.Orders.Commands
     {
         Task<Order> Get(Guid orderId);
         
-        Task Publish(IEnumerable<Event> events);
+        Task Publish(IEnumerable<OrderEvent> eventsEnumerable);
     }
 }

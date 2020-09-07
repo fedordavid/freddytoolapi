@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Freddy.Application.Customers.Commands;
 using Freddy.Application.Customers.Queries;
 using Freddy.Application.Orders.Commands;
@@ -29,7 +30,8 @@ namespace Freddy.Persistence
             services.AddScoped<ICustomers, CustomerCommandRepository>();
             services.AddScoped<IOrders, OrderCommandRepository>();
 
-            services.AddScoped<EventStore>();
+            services.AddScoped<IEventStore, EventStore>();
+            services.AddScoped(_ => new EventConverter(AppDomain.CurrentDomain.GetAssemblies()));
         }
     }
 }

@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Host;
-using Xunit;
-using Freddy.Persistence.Products;
 using Freddy.IntegrationTests.Utilities;
+using Freddy.Persistence.Products;
+using Xunit;
 
-namespace Freddy.IntegrationTests.Controllers
+namespace Freddy.IntegrationTests.API.Controllers.ProductController
 {
     public static partial class ProductControllerTests
     {

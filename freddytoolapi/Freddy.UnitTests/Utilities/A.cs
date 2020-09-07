@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Freddy.Application.Core.Events;
 using Freddy.Application.Customers.Commands;
+using Freddy.Application.Orders.Commands;
 using Freddy.Application.Products.Commands;
 
 namespace Freddy.Application.UnitTests.Utilities
@@ -37,7 +38,7 @@ namespace Freddy.Application.UnitTests.Utilities
     {
         public static class OrderCreated
         {
-            public static Expression<Func<IEnumerable<Event>, bool>> With(Guid orderId, Guid customerId)
+            public static Expression<Func<IEnumerable<OrderEvent>, bool>> With(Guid orderId, Guid customerId)
             {
                 var expected = new[] { new Orders.Commands.OrderCreated(orderId, customerId) };
                 return e => expected.SequenceEqual(e);

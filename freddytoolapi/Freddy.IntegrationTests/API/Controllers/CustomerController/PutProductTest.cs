@@ -1,12 +1,12 @@
-﻿using Freddy.Host;
-using Freddy.IntegrationTests.Utilities;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Freddy.Application.Customers.Commands;
+using Freddy.Host;
+using Freddy.IntegrationTests.Utilities;
 using Xunit;
 
-namespace Freddy.IntegrationTests.Controllers.CustomerController
+namespace Freddy.IntegrationTests.API.Controllers.CustomerController
 {
     public static partial class CustomerControllerTests
     {

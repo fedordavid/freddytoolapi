@@ -106,7 +106,6 @@ export default {
         { text: 'Size', value: 'size', sortable: false},
         { text: 'Qty', value: 'qty', sortable: false},
         { text: 'Status', value: 'status.text', sortable: false},
-        { text: '', value: 'actions', sortable: false, width: 72},
       ],
       itemStatuses
     }

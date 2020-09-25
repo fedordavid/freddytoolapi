@@ -32,10 +32,13 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    codeCoverageEnabled: false
+    codeCoverageEnabled: true
     testAssemblyVer2: |
       **\*tests*.dll
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
-    vsTestVersion: '16.0'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    otherConsoleOptions: '/platform:x64 /Framework:.NETCoreApp,Version=v3.1 /logger:console;verbosity="normal" '
+    vsTestVersion: 'latest'

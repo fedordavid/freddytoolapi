@@ -4,7 +4,7 @@
       <v-icon>mdi-plus</v-icon>
     </v-btn>
 
-    <v-dialog v-model="addOrderDialog">
+    <v-dialog v-model="addOrderDialog" max-width="640px">
       <v-card class="">
         <v-card-title class="headline">Create Order</v-card-title>
 

@@ -2,14 +2,13 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Freddy.Application.Customers.Commands;
 using Freddy.Application.Orders.Commands;
 using Freddy.Host;
 using Freddy.IntegrationTests.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Freddy.IntegrationTests.API.Controllers.CustomerController
+namespace Freddy.IntegrationTests.API.Controllers.OrdersController
 {
     public static partial class OrderControllerTests
     {
@@ -26,7 +25,7 @@ namespace Freddy.IntegrationTests.API.Controllers.CustomerController
             }
 
             [Fact]
-            public async Task PostProduct_ShouldAddOrderToDatabase()
+            public async Task PostOrder_ShouldAddOrderToDatabase()
             {
                 var customerId = new Guid("0B79BCFF-B202-4FD2-8464-9626296C2A3E");
                 var url = $"api/freddy/customers/{customerId}/orders";

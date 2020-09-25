@@ -1,41 +1,43 @@
 ﻿<template>
   <v-container>
-    <v-card-actions>
-      <h3> {{orderName}} </h3>
-      <span class="ml-2"> ({{customerName}}) </span>
-      <v-spacer></v-spacer>
-      <v-btn text>
-        <v-icon left>mdi-pencil</v-icon> Edit
-      </v-btn>
-
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>Cancel order</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>      
-      
-    </v-card-actions>
-
     <v-data-table :headers="headers" :items="orderItems" item-key="id" 
                   @click:row="(_, {item}) => startEditItem(item)" v-model="selected"
                   show-select>
+      
       <template v-slot:top>
+        
         <v-toolbar v-if="!!selected.length" flat dense>
           <v-toolbar-title>Selected {{selected.length}} items</v-toolbar-title>
           <v-spacer />
           <v-btn @click="startDeleteItems(selected)" text color="error">Delete</v-btn>
         </v-toolbar>
+        
         <v-toolbar v-else flat dense>
-          <v-toolbar-title >Order Items</v-toolbar-title>
+          <v-toolbar-title>
+            {{orderName}} 
+          </v-toolbar-title>
+          <span class="ml-2 pt-1 subtitle-1">({{customerName}})</span>
+          <v-spacer></v-spacer>
+          <v-btn text>
+            <v-icon left>mdi-pencil</v-icon> Edit
+          </v-btn>
+
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>Cancel order</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-toolbar>
+        
       </template>
+      
     </v-data-table>
 
     <div style="margin-top: 72px"></div>
@@ -44,7 +46,7 @@
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     
-    <v-dialog v-model="isEditingItem">
+    <v-dialog v-model="isEditingItem" max-width="640px">
       <v-card>
         <v-card-title class="headline">Editing {{itemToEdit.name}}</v-card-title>
 
@@ -61,7 +63,7 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="isDeletingItem">
+    <v-dialog v-model="isDeletingItem" max-width="640px">
       <v-card>
         <v-card-title class="headline"></v-card-title>
 

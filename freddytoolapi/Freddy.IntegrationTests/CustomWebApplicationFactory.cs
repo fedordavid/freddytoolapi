@@ -33,7 +33,7 @@ namespace Freddy.IntegrationTests
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
                 context.Database.Migrate();
                 new Products().Initialize(context);
                 new Customers().Initialize(context);

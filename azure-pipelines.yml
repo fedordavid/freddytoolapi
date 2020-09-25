@@ -5,7 +5,7 @@
 
 trigger:
 - master
-- feature/*
+- feature/order
 
 pool:
   vmImage: 'windows-latest'

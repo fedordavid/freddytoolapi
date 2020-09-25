@@ -5,7 +5,7 @@
 
 trigger:
 - master
-- feature/*
+- feature/orders
 
 pool:
   vmImage: 'windows-latest'
@@ -32,7 +32,7 @@ steps:
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
-    codeCoverageEnabled: true
+    codeCoverageEnabled: false
     testAssemblyVer2: |
       **\*tests*.dll
       !**\*TestAdapter.dll

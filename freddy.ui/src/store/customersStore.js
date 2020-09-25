@@ -3,7 +3,6 @@ import api from "../api/FreddyApi";
 export default {
   namespaced: true,
   state: {
-    foo: false,
     isLoading: false,
     isLoaded: false,
     hasLoadingErrors: false,
@@ -17,8 +16,7 @@ export default {
     finishLoading: state => {
       state.isLoading = false;
       state.isLoaded = true;
-    },
-    doFoo: (state, v) => state.foo = v
+    }
   },
   actions: {
     async loadCustomers({commit}) {

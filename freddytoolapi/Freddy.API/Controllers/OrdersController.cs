@@ -24,7 +24,7 @@ namespace Freddy.API.Controllers
         [HttpGet("api/freddy/customers/{customerId}/orders/{orderId}")]
         public ActionResult GetOrder(Guid customerId, Guid orderId)
         {
-            return Ok();
+            return Ok(new { id = orderId, customerId });
         }
 
         [HttpPost("api/freddy/customers/{customerId}/orders")]
@@ -32,7 +32,9 @@ namespace Freddy.API.Controllers
         {
             var orderId = _guidProvider.NewGuid();
             await _commandBus.Handle(new CreateOrderCommand(orderId, customerId));
-            return CreatedAtAction(nameof(GetOrder), new { customerId, orderId }, null);
+            return CreatedAtAction(nameof(GetOrder), 
+                new { orderId, customerId }, 
+                new { id = orderId, customerId });
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Freddy.Persistence.Orders
         public string Note { get; set; }
         public OrderStatus Status { get; set; }
 
-        public ICollection<OrderItemEntity> OrderItems { get; set; }
+        public IEnumerable OrderItems { get; set; }
         
         [Flags]
         public enum OrderStatus

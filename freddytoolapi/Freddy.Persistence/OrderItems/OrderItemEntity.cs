@@ -1,5 +1,5 @@
 ﻿using System;
-using Freddy.Application.Commands.Products;
+using Freddy.Application.Products.Commands;
 
 namespace Freddy.Persistence.OrderItems
 {

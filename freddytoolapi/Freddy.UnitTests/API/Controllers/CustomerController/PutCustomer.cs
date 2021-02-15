@@ -1,11 +1,11 @@
-﻿using Freddy.Application.Commands.Customers.UpdateCustomer;
-using Freddy.Application.Core.Commands;
+﻿using Freddy.Application.Core.Commands;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Freddy.Application.Customers.Commands.UpdateCustomer;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.API.Controllers.CustomerController

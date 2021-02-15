@@ -13,6 +13,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapActions, mapGetters, mapState } = createNamespacedHelpers('products')
 
 export default {
+  name: 'ProductsList',
   data() {
     return {
       headers: [

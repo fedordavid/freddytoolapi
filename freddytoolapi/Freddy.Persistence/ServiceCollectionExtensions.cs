@@ -1,10 +1,14 @@
-﻿using AutoMapper;
-using Freddy.Application.Commands.Customers;
-using Freddy.Application.Commands.Products;
-using Freddy.Application.Queries;
-using Freddy.Application.Queries.Products;
+﻿using System;
+using AutoMapper;
+using Freddy.Application.Customers.Commands;
+using Freddy.Application.Customers.Queries;
+using Freddy.Application.Orders.Commands;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Queries;
 using Freddy.Persistence.Customers;
 using Freddy.Persistence.DbContexts;
+using Freddy.Persistence.Events;
+using Freddy.Persistence.Orders;
 using Freddy.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +28,10 @@ namespace Freddy.Persistence
             services.AddScoped<ICustomerViews, CustomerQueryRepository>();
             services.AddScoped<IProducts, ProductCommandRepository>();
             services.AddScoped<ICustomers, CustomerCommandRepository>();
+            services.AddScoped<IOrders, OrderCommandRepository>();
+
+            services.AddScoped<IEventStore, EventStore>();
+            services.AddScoped(_ => new EventConverter(AppDomain.CurrentDomain.GetAssemblies()));
         }
     }
 }

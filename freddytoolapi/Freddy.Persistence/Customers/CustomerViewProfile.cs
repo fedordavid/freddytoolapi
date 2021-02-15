@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Freddy.Application.Queries.Customers;
+using Freddy.Application.Customers.Queries;
 
 namespace Freddy.Persistence.Customers
 {

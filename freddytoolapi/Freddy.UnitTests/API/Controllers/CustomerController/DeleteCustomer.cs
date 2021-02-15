@@ -2,9 +2,9 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Freddy.Application.Commands.Customers;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
+using Freddy.Application.Customers.Commands.DeleteCustomer;
 using Moq;
 using Xunit;
 

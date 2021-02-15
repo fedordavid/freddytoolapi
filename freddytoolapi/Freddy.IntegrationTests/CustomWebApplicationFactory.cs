@@ -24,33 +24,33 @@ namespace Freddy.IntegrationTests
                 .ConfigureWebHostDefaults(x => x.UseStartup<TStartup>().UseTestServer());
         }
 
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
-            const string testDbConnectionString = "Server=(localdb)\\mssqllocaldb;Database=freddydb-test;Trusted_Connection=True;";
-
-            builder.ConfigureServices(services =>
-            {
-                services.RemoveAll(typeof(DbContextOptions<DatabaseContext>));
-                services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(testDbConnectionString));
-            });
-        }
-
         protected override IHost CreateHost(IHostBuilder builder)
         {
-            var host = CreateHostBuilder().Build();
+            var host = CreateHostBuilder()
+                .ConfigureServices(ConfigureTestServices)
+                .Build();
 
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
                 context.Database.Migrate();
                 new Products().Initialize(context);
                 new Customers().Initialize(context);
+                new Events().Initialize(context);
             }
 
             host.Start();
 
             return host;
+        }
+
+        private void ConfigureTestServices(IServiceCollection services)
+        {
+            const string testDbConnectionString = "Server=(localdb)\\mssqllocaldb;Database=freddydb-test;Trusted_Connection=True;";
+
+            services.RemoveAll(typeof(DbContextOptions<DatabaseContext>));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(testDbConnectionString));
         }
     }
 }

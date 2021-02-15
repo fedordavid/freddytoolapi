@@ -1,10 +1,10 @@
-﻿using Freddy.Application.Commands.Products;
-using Freddy.Application.Commands.Products.UpdateProduct;
-using Freddy.Application.UnitTests.Utilities;
+﻿using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using System;
 using System.Threading.Tasks;
 using Freddy.Application.Core.Commands;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Commands.UpdateProduct;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Products

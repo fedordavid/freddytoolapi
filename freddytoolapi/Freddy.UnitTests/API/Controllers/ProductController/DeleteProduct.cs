@@ -2,8 +2,8 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Freddy.Application.Commands.Products;
 using Freddy.Application.Core.Commands;
+using Freddy.Application.Products.Commands.DeleteProduct;
 using Moq;
 using Xunit;
 

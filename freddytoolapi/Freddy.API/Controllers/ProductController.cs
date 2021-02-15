@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Freddy.API.Core;
-using Freddy.Application.Commands.Products;
-using Freddy.Application.Commands.Products.UpdateProduct;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Products;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Commands.AddProduct;
+using Freddy.Application.Products.Commands.DeleteProduct;
+using Freddy.Application.Products.Commands.UpdateProduct;
+using Freddy.Application.Products.Queries;
+using Freddy.Application.Products.Queries.GetAllProducts;
+using Freddy.Application.Products.Queries.GetProductById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Freddy.API.Controllers

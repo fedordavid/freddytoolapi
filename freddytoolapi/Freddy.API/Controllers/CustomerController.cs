@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Freddy.API.Core;
-using Freddy.Application.Commands.Customers;
-using Freddy.Application.Commands.Customers.AddCustomer;
-using Freddy.Application.Commands.Customers.UpdateCustomer;
 using Freddy.Application.Core.Commands;
 using Freddy.Application.Core.Queries;
-using Freddy.Application.Queries.Customers;
-using Freddy.Application.Queries.Customers.GetAllCustomers;
-using Freddy.Application.Queries.Customers.GetCustomerById;
+using Freddy.Application.Customers.Commands;
+using Freddy.Application.Customers.Commands.AddCustomer;
+using Freddy.Application.Customers.Commands.DeleteCustomer;
+using Freddy.Application.Customers.Commands.UpdateCustomer;
+using Freddy.Application.Customers.Queries;
+using Freddy.Application.Customers.Queries.GetAllCustomers;
+using Freddy.Application.Customers.Queries.GetCustomerById;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Freddy.API.Controllers

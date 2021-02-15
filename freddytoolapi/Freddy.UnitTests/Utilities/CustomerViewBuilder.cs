@@ -1,5 +1,5 @@
-﻿using Freddy.Application.Queries.Customers;
-using System;
+﻿using System;
+using Freddy.Application.Customers.Queries;
 
 namespace Freddy.Application.UnitTests.API.Controllers.CustomerController
 {

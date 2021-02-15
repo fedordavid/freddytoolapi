@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Freddy.Application.Commands.Products;
+using Freddy.Application.Products.Commands;
 using Freddy.Persistence.DbContexts;
 
 namespace Freddy.Persistence.Products

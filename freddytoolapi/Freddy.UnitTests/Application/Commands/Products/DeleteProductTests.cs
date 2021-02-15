@@ -1,6 +1,7 @@
-﻿using Freddy.Application.Commands.Products;
-using Moq;
+﻿using Moq;
 using System;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Commands.DeleteProduct;
 using Xunit;
 
 namespace Freddy.Application.UnitTests.Application.Commands.Products

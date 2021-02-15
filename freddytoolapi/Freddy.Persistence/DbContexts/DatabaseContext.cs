@@ -1,5 +1,6 @@
 ﻿using System;
 using Freddy.Persistence.Customers;
+using Freddy.Persistence.Events;
 using Freddy.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,9 @@ namespace Freddy.Persistence.DbContexts
 
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CustomerEntity> Customers { get; set; }
+        public DbSet<EventDescriptorEntity> Events { get; set; }
 
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductEntity>().HasData(

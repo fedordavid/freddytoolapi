@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Freddy.API;
 using Freddy.Application;
 using JetBrains.Annotations;
+using Microsoft.Net.Http.Headers;
 
 namespace Freddy.Host
 {
@@ -33,9 +34,12 @@ namespace Freddy.Host
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(cfg => cfg.AllowAnyOrigin());
+                app.UseCors(cfg => cfg
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .WithExposedHeaders(HeaderNames.Location));
             }
-
+            
             app.UseRouting();
             
             app.UseEndpoints(endpoints =>

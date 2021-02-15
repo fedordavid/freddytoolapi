@@ -1,5 +1,6 @@
 using System;
-using Freddy.Application.Commands.Products;
+using Freddy.Application.Products.Commands;
+using Freddy.Application.Products.Commands.AddProduct;
 using Freddy.Application.UnitTests.Utilities;
 using Moq;
 using Xunit;

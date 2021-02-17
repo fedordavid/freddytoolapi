@@ -26,7 +26,7 @@ export default {
       commit('setProducts', []);
 
       try {
-        const response = await api.get('http://localhost:5008/api/freddy/products');
+        const response = await api.get('http://'+process.env.VUE_APP_API_URL+'/products');
         commit('setProducts', response.data);
       } catch {
         commit('setErrors');

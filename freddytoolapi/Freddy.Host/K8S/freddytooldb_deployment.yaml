@@ -1,0 +1,38 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+          name: db
+          ports:
+            - containerPort: 1433  
+          env:
+            - name: MSSQL_SA_PASSWORD
+              value: "ixnfutDPCM5408*"
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: MSSQL_PID
+              value: "Express"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  ports:
+    - port: 1433
+  selector:
+    app: db

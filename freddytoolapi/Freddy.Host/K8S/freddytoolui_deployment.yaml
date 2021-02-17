@@ -1,0 +1,32 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freddytoolui
+  labels:
+    app: freddytoolui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freddytoolui
+  template:
+    metadata:
+      labels:
+        app: freddytoolui
+    spec:
+      containers:
+        - name: freddytoolui
+          image: DAVIDFEDORK8S.azurecr.io/freddytoolui:v6
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: freddytoolui
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+  selector:
+    app: freddytoolui

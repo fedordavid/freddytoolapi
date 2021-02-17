@@ -26,7 +26,7 @@ export default {
       commit('setCustomers', []);
 
       try {
-        const response = await api.get('http://localhost:5008/api/freddy/customers');
+        const response = await api.get('http://'+process.env.VUE_APP_API_URL+'/customers');
         commit('setCustomers', response.data);
       } catch {
         commit('setErrors');

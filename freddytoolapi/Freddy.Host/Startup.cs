@@ -1,3 +1,4 @@
+using System;
 using Freddy.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,8 @@ using Freddy.API;
 using Freddy.Application;
 using JetBrains.Annotations;
 using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Freddy.Host
 {
@@ -26,6 +29,17 @@ namespace Freddy.Host
             services.AddQueries();
             services.AddCommands();
             services.AddPersistence(_configuration);
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Version = "v1",
+                Title = "Freddytool API",
+                Description = "Freddytool API serves only learning purposes",
+                Contact = new OpenApiContact
+                {
+                    Name = "David Fedor",
+                    Email = "dark1500@gmail.com",
+                }
+            }));
         }
 
         [UsedImplicitly] // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +54,17 @@ namespace Freddy.Host
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .WithExposedHeaders(HeaderNames.Location));
+
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
             
             app.UseRouting();
             
